@@ -1652,7 +1652,7 @@
   <header class="header">
     <div class="header-left">
       <a class="logo" href="#" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
-        <img src="/static/assets/algoleap-logo.png" alt="Algoleap Logo" style="width: 150px;">
+        <img src="assets/algoleap-logo.png" alt="Algoleap Logo" style="width: 150px;">
       </a>
       <div class="header-divider"></div>
       <span class="header-title">Supply Chain Intelligence</span>
@@ -1931,7 +1931,7 @@
     // forcefully route all API requests back to the local backend port 8000.
     // Otherwise, use the server's own origin dynamically.
     // For deployment: replace "https:nike-o9-supply-chain.onrender.com" with your actual Render service URL.
-    const CLOUD_API_URL = '';
+    const CLOUD_API_URL = 'https://nike-o9-supply-chain.onrender.com';
     const API_BASE = CLOUD_API_URL || (window.location.protocol === 'file:' ? 'http://localhost:8009' : window.location.origin);
 
     /* ══════════════ DASHBOARD RENDERING ══════════════ */
