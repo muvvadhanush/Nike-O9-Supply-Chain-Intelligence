@@ -59,14 +59,13 @@ class RecommendationAgent:
         return ""
 
     def _get_ollama_rationale(self, use_case: str, context: str) -> str:
-        """Attempts to fetch a cohesive strategic paragraph."""
+        """Attempts to fetch a cohesive strategic paragraph (30-50 words)."""
         prompt = (
-            f"You are a Nike Supply Chain AI. Use case: {use_case}. "
-            f"Context: {context}. "
-            f"Provide a cohesive 1-paragraph strategic summary. "
-            f"The paragraph MUST first describe the core supply chain problem, "
-            f"and then explicitly state why this particular recommendation is the best strategic choice "
-            f"among the generated options. Keep it under 100 words."
+            f"Role: Senior Nike Supply Chain Strategist. Use case: {use_case}. "
+            f"Data Context: {context}. "
+            f"Deliver a 30-50 word strategic 'Why' statement. Explain the specific trade-offs between "
+            f"logistics cost, lead-time, and fill-rate. Focus on why this option is superior "
+            f"for protecting Nike's quarterly revenue vs other alternatives."
         )
         return self._call_llm_api(prompt)
 
@@ -87,15 +86,20 @@ class RecommendationAgent:
 
     def provide_brief_summary(self, scenario_type: str, context_data: dict) -> dict:
         """
-        Provides a concise 'Why' and 'Context' for the dashboard view.
+        Provides a deep-dive 100-word summary and professional context.
         """
         prompt = f"""
-        Role: Nike Supply Chain Intelligence Agent.
-        Task: Provide a 1-sentence 'Why' and a 1-sentence 'Context' for a {scenario_type} alert.
-        Data: {json.dumps(context_data)}
+        Role: Nike Executive Supply Chain Intelligence Agent.
+        Task: Provide a detailed, professional 100-word analysis for a {scenario_type} alert.
+        Data Context: {json.dumps(context_data)}
+        
+        Requirements:
+        1. 'why': A 100-word analytical summary of the disruption and the recommended mitigation logic. 
+           Be specific about the operational risks.
+        2. 'ctx': A 1-sentence professional situational update.
         
         Return JSON format: {{"why": "...", "ctx": "..."}}
-        Keep it professional, data-driven, and specific to the SKU/Supplier mentioned.
+        Voice: Senior, data-driven, Nike-specific.
         """
         try:
             response = self._call_llm_api(prompt, is_json=True)
@@ -124,13 +128,14 @@ class RecommendationAgent:
                 )
             
             prompt = (
-                f"You are a Nike Supply Chain Expert. Use case: {use_case}. "
-                f"Scenario Context: {context}. {stat_ctx}"
-                f"The user selected this logistics option: {option_title} ({option_desc}). "
-                f"Generate a granular, 4-step sequential implementation roadmap for this specific selection. "
-                f"Each step must be a concrete operational action. "
-                f"Format as JSON with keys: 'kpis' (list of objects with keys 'lbl', 'val', 'delta', 'neg'), "
-                f"'confidence': int, 'confLabel': str, 'contingency': list, 'actions': list."
+                f"Role: Nike Supply Chain Manager. Use case: {use_case}. "
+                f"Full Context: {context}. {stat_ctx}"
+                f"Target Option: {option_title} ({option_desc}). "
+                f"Generate a granular, 4-step sequential implementation roadmap. "
+                "CRITICAL: You must use the real names of products (e.g. Air Max), locations (e.g. Memphis DC), "
+                "stores, or suppliers provided in the context to make the steps actionable. "
+                f"Formulate these steps as the actual next actions you will take today. "
+                f"Format as JSON with keys: 'kpis' (list), 'confidence': int, 'confLabel': str, 'contingency': list, 'actions': list."
             )
             raw_resp = self._call_llm_api(prompt, is_json=True)
             if raw_resp:

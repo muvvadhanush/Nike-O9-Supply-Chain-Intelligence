@@ -567,7 +567,7 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
                 {'label': 'Signal Source', 'value': primary.source},
                 {'label': 'Demand uplift', 'value': f"+{uplift}%"},
                 {'label': 'Historical Accuracy', 'value': f"{hist_acc:.1f}%"},
-                {'label': 'Simulations Run', 'value': '500'},
+                {'label': 'Simulations Run', 'value': str(len(simulated) * 500)},
                 {'label': 'Options Found', 'value': str(len(simulated))},
             ],
             steps=[
@@ -655,7 +655,7 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
                 {'label': 'Inventory Gap', 'value': f"{gap:,} units"},
                 {'label': 'Affected SKU', 'value': critical.sku},
                 {'label': 'Source Hub', 'value': transfer['from_dc']},
-                {'label': 'Simulations Run', 'value': '500'},
+                {'label': 'Simulations Run', 'value': str(len(simulated) * 500)},
                 {'label': 'Options Found', 'value': str(len(simulated))},
             ],
             steps=[
@@ -741,7 +741,7 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
                 {'label': 'Disrupted Entity', 'value': s_name},
                 {'label': 'Impacted Units', 'value': '245,000'},
                 {'label': 'Risk Assessment', 'value': 'Critical'},
-                {'label': 'Simulations Run', 'value': '500'},
+                {'label': 'Simulations Run', 'value': str(len(simulated) * 500)},
                 {'label': 'Options Found', 'value': str(len(simulated))},
             ],
             steps=[
