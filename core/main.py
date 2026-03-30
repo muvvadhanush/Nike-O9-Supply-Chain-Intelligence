@@ -28,8 +28,12 @@ app.mount("/static", StaticFiles(directory=UI_DIR), name="static")
 @app.get("/")
 async def get_index():
     """Returns the primary Nike POC dashboard."""
-    html_file = "Nike POC with O9 Synthetic Data .html"
+    html_file = "index.html"
     return FileResponse(os.path.join(UI_DIR, html_file))
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse(os.path.join(UI_DIR, "favicon.svg"))
 
 
 @app.get("/api/initial-state", response_model=InitialState)
