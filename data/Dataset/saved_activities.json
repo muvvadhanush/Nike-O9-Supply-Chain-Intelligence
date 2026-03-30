@@ -1,0 +1,237 @@
+[
+  {
+    "scenario_title": "Demand Surge",
+    "use_case": "DEMAND_SURGE",
+    "option_name": "B \u2014 Secondary",
+    "recommendation": {
+      "kpis": [
+        {
+          "lbl": "Fill Rate",
+          "val": "96%",
+          "delta": "+4% vs baseline",
+          "neg": false
+        },
+        {
+          "lbl": "Air Cost",
+          "val": "+$280K",
+          "delta": "Within Budget",
+          "neg": false
+        },
+        {
+          "lbl": "Order Cycle",
+          "val": "4.2 days",
+          "delta": "-2.1d",
+          "neg": false
+        },
+        {
+          "lbl": "Stockout Risk",
+          "val": "2%",
+          "delta": "Minimized",
+          "neg": false
+        }
+      ],
+      "confidence": 92,
+      "confLabel": "Simulated AI Implementation Roadmap",
+      "contingency": [
+        "Monitor social sentiment for 48h",
+        "Pre-book secondary air lane"
+      ],
+      "actions": [
+        "Trigger B \u2014 Secondary protocol for 12,500 units via expedited logistics.",
+        "Authorize +$280K budget allocation for inbound Nike freight processing.",
+        "Pre-position safety stock from Guangzhou Footwear Co to mitigate regional surge.",
+        "Synchronize demand signal with regional marketing for promo-throttling."
+      ]
+    },
+    "timestamp": "2026-03-24T20:49:49.835Z",
+    "id": "c094333a"
+  },
+  {
+    "scenario_title": "Supplier Constraint",
+    "use_case": "SUPPLIER_CONSTRAINT",
+    "option_name": "2 \u2014 Full switch",
+    "recommendation": {
+      "kpis": [
+        {
+          "lbl": "Rev Protected",
+          "val": "$8.5M",
+          "delta": "Optimal",
+          "neg": false
+        },
+        {
+          "lbl": "Launch Delay",
+          "val": "14 days",
+          "delta": "-7 days vs wait",
+          "neg": false
+        },
+        {
+          "lbl": "SLA Quality",
+          "val": "94.5%",
+          "delta": "Maintained",
+          "neg": false
+        },
+        {
+          "lbl": "Freight Uplift",
+          "val": "+18 days",
+          "delta": "Budgeted",
+          "neg": true
+        }
+      ],
+      "confidence": 88,
+      "confLabel": "Simulated AI Implementation Roadmap",
+      "contingency": [
+        "Assess Tier-2 ripple effects",
+        "Repair schedule validation"
+      ],
+      "actions": [
+        "Activate 2 \u2014 Full switch redundant path with the Chennai Textile Group.",
+        "Route high-margin units to secure revenue protection via +18 days uplift.",
+        "Apply emergency quality-inspection gates at port of departure (Saigon).",
+        "Negotiate 15% discount on pending raw material orders due to delay."
+      ]
+    },
+    "timestamp": "2026-03-25T06:44:48.361Z",
+    "id": "dd3643d3"
+  },
+  {
+    "scenario_title": "Inventory Rebalancing",
+    "use_case": "INVENTORY_REBALANCING",
+    "option_name": "3 \u2014 Optimal",
+    "recommendation": {
+      "kpis": [
+        {
+          "lbl": "Net Benefit",
+          "val": "$14,200",
+          "delta": "Cost Avoidance",
+          "neg": false
+        },
+        {
+          "lbl": "SLA Hit",
+          "val": "99.2%",
+          "delta": "Target Met",
+          "neg": false
+        },
+        {
+          "lbl": "Carbon Impact",
+          "val": "-12%",
+          "delta": "Optimized",
+          "neg": false
+        },
+        {
+          "lbl": "DC Utilization",
+          "val": "82%",
+          "delta": "Balanced",
+          "neg": false
+        }
+      ],
+      "confidence": 92,
+      "confLabel": "Simulated AI Implementation Roadmap",
+      "contingency": [
+        "Verify carrier availability for LTL",
+        "Check warehouse loading dock status"
+      ],
+      "actions": [
+        "Execute 3 \u2014 Optimal strategy for identified SKU stockout gaps.",
+        "Initiate LTL transfer from Memphis DC to Atlanta DC at +$8K overhead.",
+        "Lock inventory allocation in SAP-IBP to prevent local wholesale consumption.",
+        "Update regional supply leads on projected 48-hour SLA recovery."
+      ]
+    },
+    "timestamp": "2026-03-25T11:10:33.925Z",
+    "id": "4363dbe3"
+  },
+  {
+    "scenario_title": "Demand Surge",
+    "use_case": "DEMAND_SURGE",
+    "option_name": "C \u2014 Hybrid",
+    "recommendation": {
+      "kpis": [
+        {
+          "lbl": "Fill Rate",
+          "val": "96%",
+          "delta": "+4% vs baseline",
+          "neg": false
+        },
+        {
+          "lbl": "Air Cost",
+          "val": "+$320K",
+          "delta": "Within Budget",
+          "neg": false
+        },
+        {
+          "lbl": "Order Cycle",
+          "val": "4.2 days",
+          "delta": "-2.1d",
+          "neg": false
+        },
+        {
+          "lbl": "Stockout Risk",
+          "val": "2%",
+          "delta": "Minimized",
+          "neg": false
+        }
+      ],
+      "confidence": 92,
+      "confLabel": "Simulated AI Implementation Roadmap",
+      "contingency": [
+        "Monitor social sentiment for 48h",
+        "Pre-book secondary air lane"
+      ],
+      "actions": [
+        "Trigger C \u2014 Hybrid protocol for 12,500 units via expedited logistics.",
+        "Authorize +$320K budget allocation for inbound Nike freight processing.",
+        "Pre-position safety stock from Guangzhou Footwear Co to mitigate regional surge.",
+        "Synchronize demand signal with regional marketing for promo-throttling."
+      ]
+    },
+    "timestamp": "2026-03-25T11:25:49.535Z",
+    "id": "c6f9ea17"
+  },
+  {
+    "scenario_title": "Supplier Constraint",
+    "use_case": "SUPPLIER_CONSTRAINT",
+    "option_name": "4 \u2014 Expedite + Alt",
+    "recommendation": {
+      "kpis": [
+        {
+          "lbl": "Rev Protected",
+          "val": "$8.5M",
+          "delta": "Optimal",
+          "neg": false
+        },
+        {
+          "lbl": "Launch Delay",
+          "val": "14 days",
+          "delta": "-7 days vs wait",
+          "neg": false
+        },
+        {
+          "lbl": "SLA Quality",
+          "val": "94.5%",
+          "delta": "Maintained",
+          "neg": false
+        },
+        {
+          "lbl": "Freight Uplift",
+          "val": "14 days",
+          "delta": "Budgeted",
+          "neg": true
+        }
+      ],
+      "confidence": 88,
+      "confLabel": "AI-Driven Implementation Roadmap",
+      "contingency": [
+        "Assess Tier-2 ripple effects",
+        "Repair schedule validation"
+      ],
+      "actions": [
+        "Activate 4 \u2014 Expedite + Alt redundant path with the Chennai Textile Group.",
+        "Route high-margin units to secure revenue protection via 14 days uplift.",
+        "Apply emergency quality-inspection gates at port of departure (Saigon).",
+        "Negotiate 15% discount on pending raw material orders due to delay."
+      ]
+    },
+    "timestamp": "2026-03-27T11:53:02.966Z",
+    "id": "384270e4"
+  }
+]

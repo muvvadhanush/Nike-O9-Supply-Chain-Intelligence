@@ -1,0 +1,4 @@
+scenario_id,scenario_type,description,preferred_action,expected_outcome
+SCN-001,Demand Surge,Air Max NA spike,Scenario_C_Hybrid,Maintain 95% service level
+SCN-002,Inventory Rebalance,Denver to Atlanta transfer,Transfer_6500_Units,Zero stockout risk
+SCN-003,Supplier Disruption,Bangladesh delay,Scenario_4_Expedite,Limit delay to 14 days

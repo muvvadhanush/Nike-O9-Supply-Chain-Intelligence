@@ -1,0 +1,7 @@
+supplier_id,supplier_name,country,product_category,weekly_capacity_units,current_utilization,lead_time_days,lead_time_std_days,quality_score,cost_per_unit,co2_per_unit_kg,compliance_rating
+VNM-001,Saigon Premium,Vietnam,Footwear Assembly,135983,0.8312421789199633,27,2,4.7,15.77,3.72,A
+CHN-002,Guangzhou Footwear,China,Footwear Assembly,141456,0.8134115619152059,23,6,4.7,21.91,2.28,A
+IND-003,Chennai Textiles,India,Apparel Fabrics,149207,0.8365499850891576,22,5,4.3,15.16,4.81,B+
+BGD-004,Dhaka Garments,Bangladesh,Finished Apparel,142598,0.621154517077689,22,3,4.1,22.58,4.42,B+
+MEX-005,Monterrey Logistics,Mexico,Footwear Assembly,85250,0.8001943662246123,17,6,4.8,13.52,4.93,A-
+IDN-006,Jakarta Apparel,Indonesia,Apparel Fabrics,118886,0.632150538425076,18,3,4.6,18.17,4.32,A-

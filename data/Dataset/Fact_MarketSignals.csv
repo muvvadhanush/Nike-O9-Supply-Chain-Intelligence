@@ -1,0 +1,481 @@
+event_type,intensity,days_to_impact,confidence_score,source
+economic_indicator,89.52,0.0,0.9951,ESPN Analytics
+social_media_trend,31.9,0.0,0.947,Instagram Insights
+weather_impact,198.01,0.0,0.9354,Reuters
+sports_event_trigger,75.38,0.0,0.8974,Bloomberg
+economic_indicator,115.55,0.0,0.6225,AccuWeather API
+social_media_trend,153.77,0.0,0.9991,NOAA
+weather_impact,175.07,0.0,0.6387,TikTok Trends
+search_trend_spike,195.12,0.0,0.6632,AccuWeather API
+search_trend_spike,172.68,0.0,0.6957,Reuters
+social_media_trend,27.25,0.0,0.8643,ESPN Analytics
+influencer_endorsement,117.36,0.0,0.8178,Bloomberg
+social_media_trend,188.11,0.0,0.8471,Instagram Insights
+search_trend_spike,39.46,0.0,0.6231,ESPN Analytics
+social_media_trend,95.38,0.0,0.8029,Instagram Insights
+weather_impact,149.12,0.0,0.9975,Google Trends
+competitor_pricing_change,135.02,0.0,0.8,Google Trends
+economic_indicator,60.31,0.0,0.8697,ESPN Analytics
+weather_impact,181.38,0.0,0.6825,Instagram Insights
+economic_indicator,2.51,0.0,0.9922,Reuters
+influencer_endorsement,114.61,0.0,0.6071,Instagram Insights
+weather_impact,86.74,0.0,0.8062,NOAA
+competitor_pricing_change,7.02,0.0,0.6532,Instagram Insights
+competitor_pricing_change,68.09,0.0,0.7558,AccuWeather API
+sports_event_trigger,51.39,0.0,0.818,TikTok Trends
+search_trend_spike,102.92,0.0,0.7624,TikTok Trends
+search_trend_spike,73.46,0.0,0.6824,Google Trends
+weather_impact,115.63,0.0,0.7654,AccuWeather API
+weather_impact,64.39,0.0,0.6498,TikTok Trends
+social_media_trend,157.43,0.0,0.6051,Reuters
+sports_event_trigger,68.63,0.0,0.8851,Reuters
+social_media_trend,61.88,0.0,0.9627,TikTok Trends
+social_media_trend,163.75,0.0,0.6459,NOAA
+sports_event_trigger,198.51,0.0,0.6688,ESPN Analytics
+weather_impact,86.76,0.0,0.7185,NOAA
+competitor_pricing_change,32.48,0.0,0.7183,Google Trends
+social_media_trend,58.84,0.0,0.652,TikTok Trends
+influencer_endorsement,13.71,0.0,0.881,TikTok Trends
+search_trend_spike,145.63,0.0,0.6713,Bloomberg
+competitor_pricing_change,41.73,0.0,0.6033,TikTok Trends
+sports_event_trigger,17.21,0.0,0.8882,NOAA
+social_media_trend,83.38,0.0,0.6804,Bloomberg
+weather_impact,98.07,0.0,0.9374,TikTok Trends
+social_media_trend,149.71,0.0,0.805,NOAA
+economic_indicator,149.13,0.0,0.6939,Reuters
+economic_indicator,196.33,0.0,0.6438,Instagram Insights
+influencer_endorsement,38.43,0.0,0.8938,Google Trends
+influencer_endorsement,40.52,0.0,0.7146,AccuWeather API
+economic_indicator,102.1,0.0,0.8798,Instagram Insights
+weather_impact,155.08,0.0,0.8117,AccuWeather API
+social_media_trend,48.54,0.0,0.8338,Bloomberg
+sports_event_trigger,1.89,0.0,0.6782,Google Trends
+influencer_endorsement,25.05,0.0,0.9698,Google Trends
+sports_event_trigger,100.35,0.0,0.7387,Instagram Insights
+influencer_endorsement,56.45,0.0,0.6117,Google Trends
+weather_impact,72.7,0.0,0.6472,Reuters
+competitor_pricing_change,1000.0,0.0,0.6167,Reuters
+influencer_endorsement,31.72,0.0,0.8187,Instagram Insights
+weather_impact,74.41,0.0,0.786,Bloomberg
+competitor_pricing_change,101.85,0.0,0.7528,Bloomberg
+weather_impact,187.15,0.0,0.8046,NOAA
+competitor_pricing_change,131.67,0.0,0.8927,NOAA
+influencer_endorsement,49.98,0.0,0.7493,Google Trends
+search_trend_spike,109.92,0.0,0.7032,Reuters
+social_media_trend,51.28,0.0,0.8121,TikTok Trends
+search_trend_spike,66.14,0.0,0.7222,Reuters
+economic_indicator,183.89,0.0,0.6142,Bloomberg
+search_trend_spike,50.12,0.0,0.9762,NOAA
+sports_event_trigger,42.74,0.0,0.7387,NOAA
+search_trend_spike,121.42,0.0,0.8126,ESPN Analytics
+influencer_endorsement,144.93,0.0,0.6011,Reuters
+sports_event_trigger,90.55,0.0,0.6856,Reuters
+social_media_trend,189.19,0.0,0.7004,TikTok Trends
+weather_impact,28.63,0.0,0.6254,NOAA
+competitor_pricing_change,83.14,0.0,0.9747,Reuters
+influencer_endorsement,32.75,0.0,0.7149,NOAA
+weather_impact,63.51,0.0,0.936,AccuWeather API
+sports_event_trigger,24.47,0.0,0.6828,TikTok Trends
+weather_impact,90.4,0.0,0.6124,Google Trends
+influencer_endorsement,54.57,0.0,0.7702,ESPN Analytics
+social_media_trend,94.16,0.0,0.9956,Google Trends
+search_trend_spike,125.98,0.0,0.6647,Instagram Insights
+social_media_trend,10.47,0.0,0.6092,Instagram Insights
+sports_event_trigger,137.35,0.0,0.6793,Bloomberg
+economic_indicator,191.0,0.0,0.7617,Reuters
+search_trend_spike,36.42,0.0,0.8581,NOAA
+search_trend_spike,79.12,0.0,0.8487,NOAA
+competitor_pricing_change,42.34,0.0,0.6299,ESPN Analytics
+search_trend_spike,15.6,0.0,0.7387,Instagram Insights
+economic_indicator,16.48,0.0,0.9765,NOAA
+sports_event_trigger,155.33,0.0,0.9799,Google Trends
+social_media_trend,55.28,0.0,0.7305,ESPN Analytics
+economic_indicator,177.93,0.0,0.6905,Reuters
+sports_event_trigger,193.91,0.0,0.9861,ESPN Analytics
+competitor_pricing_change,167.83,0.0,0.6766,Google Trends
+economic_indicator,38.79,0.0,0.8165,TikTok Trends
+sports_event_trigger,189.86,0.0,0.7039,NOAA
+economic_indicator,50.54,0.0,0.8003,AccuWeather API
+social_media_trend,105.53,0.0,0.8458,Instagram Insights
+competitor_pricing_change,19.2,0.0,0.9984,AccuWeather API
+influencer_endorsement,192.25,0.0,0.8993,NOAA
+competitor_pricing_change,2.25,0.0,0.85,Google Trends
+sports_event_trigger,62.09,0.0,0.6972,Instagram Insights
+economic_indicator,1000.0,0.0,0.634,Google Trends
+competitor_pricing_change,71.73,0.0,0.8245,AccuWeather API
+influencer_endorsement,174.98,0.0,0.9552,ESPN Analytics
+economic_indicator,77.22,0.0,0.9291,AccuWeather API
+weather_impact,82.09,0.0,0.6641,AccuWeather API
+weather_impact,104.35,0.0,0.7496,NOAA
+influencer_endorsement,196.22,0.0,0.9978,Google Trends
+search_trend_spike,164.3,0.0,0.632,NOAA
+competitor_pricing_change,25.14,0.0,0.7171,Instagram Insights
+sports_event_trigger,174.2,0.0,0.7959,ESPN Analytics
+sports_event_trigger,55.39,0.0,0.7998,Bloomberg
+influencer_endorsement,138.98,0.0,0.8615,TikTok Trends
+sports_event_trigger,76.48,0.0,0.6977,Instagram Insights
+influencer_endorsement,90.32,0.0,0.6671,AccuWeather API
+competitor_pricing_change,34.21,0.0,0.741,ESPN Analytics
+economic_indicator,162.06,0.0,0.7666,Reuters
+weather_impact,3.47,0.0,0.8041,Google Trends
+social_media_trend,63.51,0.0,0.668,TikTok Trends
+economic_indicator,174.97,0.0,0.8455,AccuWeather API
+search_trend_spike,188.8,0.0,0.9335,TikTok Trends
+influencer_endorsement,4.65,0.0,0.8587,NOAA
+economic_indicator,16.51,0.0,0.6295,Instagram Insights
+search_trend_spike,11.26,0.0,0.9072,ESPN Analytics
+search_trend_spike,149.06,0.0,0.6246,Bloomberg
+influencer_endorsement,71.05,0.0,0.6431,AccuWeather API
+search_trend_spike,9.81,0.0,0.753,TikTok Trends
+search_trend_spike,84.54,0.0,0.7609,ESPN Analytics
+search_trend_spike,126.06,0.0,0.777,TikTok Trends
+influencer_endorsement,11.04,0.0,0.8686,NOAA
+competitor_pricing_change,60.69,0.0,0.6425,ESPN Analytics
+influencer_endorsement,61.9,0.0,0.8355,ESPN Analytics
+competitor_pricing_change,183.17,0.0,0.6859,TikTok Trends
+competitor_pricing_change,17.76,0.0,0.7817,Reuters
+sports_event_trigger,68.42,0.0,0.7487,ESPN Analytics
+sports_event_trigger,10.98,0.0,0.9318,NOAA
+search_trend_spike,124.08,0.0,0.6822,Google Trends
+competitor_pricing_change,68.63,0.0,0.613,Reuters
+search_trend_spike,23.6,0.0,0.8014,AccuWeather API
+influencer_endorsement,180.84,0.0,0.9901,AccuWeather API
+weather_impact,186.47,0.0,0.7309,TikTok Trends
+search_trend_spike,81.08,0.0,0.6572,TikTok Trends
+search_trend_spike,17.82,0.0,0.7431,Reuters
+competitor_pricing_change,46.78,0.0,0.7641,Bloomberg
+competitor_pricing_change,53.62,0.0,0.7763,Google Trends
+social_media_trend,74.02,0.0,0.6903,Bloomberg
+search_trend_spike,150.85,0.0,0.7676,Google Trends
+sports_event_trigger,3.01,0.0,0.6266,Bloomberg
+competitor_pricing_change,41.55,0.0,0.7344,Instagram Insights
+influencer_endorsement,68.92,0.0,0.9427,ESPN Analytics
+search_trend_spike,18.75,0.0,0.7143,Google Trends
+search_trend_spike,78.74,0.0,0.6153,NOAA
+economic_indicator,3.51,0.0,0.7636,Reuters
+competitor_pricing_change,182.78,0.0,0.8543,Bloomberg
+competitor_pricing_change,110.91,0.0,0.7219,NOAA
+social_media_trend,164.01,0.0,0.7918,TikTok Trends
+social_media_trend,95.32,0.0,0.8996,AccuWeather API
+sports_event_trigger,163.3,0.0,0.9912,Bloomberg
+influencer_endorsement,97.95,0.0,0.8318,AccuWeather API
+sports_event_trigger,155.38,0.0,0.621,ESPN Analytics
+economic_indicator,158.58,0.0,0.7126,ESPN Analytics
+social_media_trend,135.64,0.0,0.6612,Bloomberg
+social_media_trend,96.21,0.0,0.6515,Instagram Insights
+competitor_pricing_change,98.55,0.0,0.8802,AccuWeather API
+social_media_trend,25.75,0.0,0.6509,TikTok Trends
+economic_indicator,35.07,0.0,0.6764,Bloomberg
+social_media_trend,157.78,0.0,0.7134,TikTok Trends
+weather_impact,140.74,0.0,0.8131,ESPN Analytics
+search_trend_spike,152.81,0.0,0.7186,Bloomberg
+influencer_endorsement,181.14,0.0,0.793,TikTok Trends
+influencer_endorsement,45.12,0.0,0.7087,Reuters
+search_trend_spike,188.36,0.0,0.8444,Instagram Insights
+influencer_endorsement,53.45,0.0,0.7268,AccuWeather API
+social_media_trend,47.1,0.0,0.7135,AccuWeather API
+economic_indicator,123.29,0.0,0.9507,ESPN Analytics
+sports_event_trigger,73.77,0.0,0.6838,Google Trends
+social_media_trend,188.64,0.0,0.8819,TikTok Trends
+weather_impact,166.79,0.0,0.8996,Instagram Insights
+social_media_trend,171.39,0.0,0.8345,TikTok Trends
+social_media_trend,191.34,0.0,0.9565,TikTok Trends
+sports_event_trigger,153.19,0.0,0.9846,Bloomberg
+economic_indicator,7.9,0.0,0.9216,TikTok Trends
+social_media_trend,172.18,0.0,0.8399,Google Trends
+sports_event_trigger,108.57,0.0,0.6537,Instagram Insights
+economic_indicator,135.88,0.0,0.7349,NOAA
+influencer_endorsement,177.11,0.0,0.8789,Instagram Insights
+influencer_endorsement,58.47,0.0,0.9867,TikTok Trends
+sports_event_trigger,9.48,0.0,0.9436,Instagram Insights
+sports_event_trigger,28.85,0.0,0.6981,Instagram Insights
+economic_indicator,95.06,0.0,0.8684,Reuters
+competitor_pricing_change,33.92,0.0,0.7382,TikTok Trends
+influencer_endorsement,46.16,0.0,0.8964,AccuWeather API
+weather_impact,113.02,0.0,0.6312,Reuters
+influencer_endorsement,190.11,0.0,0.869,NOAA
+search_trend_spike,82.2,0.0,0.8087,Bloomberg
+sports_event_trigger,36.62,0.0,0.8278,ESPN Analytics
+search_trend_spike,90.66,0.0,0.9916,Google Trends
+sports_event_trigger,161.75,0.0,0.617,AccuWeather API
+social_media_trend,14.24,0.0,0.8806,NOAA
+sports_event_trigger,155.39,0.0,0.7482,NOAA
+search_trend_spike,102.5,0.0,0.9097,NOAA
+social_media_trend,51.86,0.0,0.9272,NOAA
+social_media_trend,139.46,0.0,0.7776,Bloomberg
+search_trend_spike,120.54,0.0,0.7349,Bloomberg
+weather_impact,172.59,0.0,0.8511,Instagram Insights
+social_media_trend,84.82,0.0,0.8505,AccuWeather API
+competitor_pricing_change,19.36,0.0,0.8426,NOAA
+search_trend_spike,38.6,0.0,0.918,Bloomberg
+influencer_endorsement,26.58,0.0,0.714,TikTok Trends
+influencer_endorsement,109.4,0.0,0.872,AccuWeather API
+influencer_endorsement,120.84,0.0,0.7564,Instagram Insights
+economic_indicator,176.77,0.0,0.6842,Reuters
+economic_indicator,118.53,0.0,0.6161,Bloomberg
+influencer_endorsement,77.02,0.0,0.8258,ESPN Analytics
+search_trend_spike,54.8,0.0,0.8021,AccuWeather API
+competitor_pricing_change,12.08,0.0,0.7456,Bloomberg
+sports_event_trigger,180.24,0.0,0.9248,Instagram Insights
+social_media_trend,17.42,0.0,0.8182,AccuWeather API
+influencer_endorsement,11.5,0.0,0.9551,TikTok Trends
+competitor_pricing_change,22.15,0.0,0.9079,AccuWeather API
+search_trend_spike,158.27,0.0,0.7046,AccuWeather API
+weather_impact,61.68,0.0,0.6207,Bloomberg
+economic_indicator,83.42,0.0,0.6044,Reuters
+weather_impact,14.65,0.0,0.7478,Instagram Insights
+competitor_pricing_change,1000.0,0.0,0.7033,Reuters
+sports_event_trigger,199.77,0.0,0.7349,AccuWeather API
+influencer_endorsement,63.66,0.0,0.971,Reuters
+influencer_endorsement,31.24,0.0,0.886,TikTok Trends
+economic_indicator,123.46,0.0,0.9807,Reuters
+social_media_trend,116.01,0.0,0.9335,Reuters
+sports_event_trigger,162.93,0.0,0.8496,TikTok Trends
+social_media_trend,6.97,0.0,0.849,TikTok Trends
+competitor_pricing_change,83.41,0.0,0.9915,TikTok Trends
+weather_impact,166.28,0.0,0.8435,NOAA
+sports_event_trigger,95.53,0.0,0.8577,NOAA
+sports_event_trigger,90.25,0.0,0.7546,TikTok Trends
+social_media_trend,11.68,0.0,0.6728,TikTok Trends
+economic_indicator,109.18,0.0,0.7167,Instagram Insights
+social_media_trend,191.19,0.0,0.7658,TikTok Trends
+social_media_trend,30.74,0.0,0.8069,Google Trends
+sports_event_trigger,1000.0,0.0,0.9125,Bloomberg
+search_trend_spike,117.56,0.0,0.7095,Instagram Insights
+search_trend_spike,98.79,0.0,0.7831,Bloomberg
+search_trend_spike,89.0,0.0,0.998,Bloomberg
+economic_indicator,48.24,0.0,0.8102,TikTok Trends
+sports_event_trigger,82.42,0.0,0.7924,Reuters
+social_media_trend,174.05,0.0,0.93,AccuWeather API
+weather_impact,88.24,0.0,0.7298,Reuters
+social_media_trend,160.82,0.0,0.7146,Bloomberg
+economic_indicator,53.06,0.0,0.7643,Google Trends
+search_trend_spike,101.06,0.0,0.8244,Bloomberg
+economic_indicator,191.38,0.0,0.8701,Bloomberg
+sports_event_trigger,48.03,0.0,0.6069,Google Trends
+influencer_endorsement,8.45,0.0,0.996,ESPN Analytics
+social_media_trend,27.77,0.0,0.9714,TikTok Trends
+influencer_endorsement,191.64,0.0,0.9892,Bloomberg
+social_media_trend,143.67,0.0,0.72,TikTok Trends
+competitor_pricing_change,111.45,0.0,0.6983,Instagram Insights
+search_trend_spike,155.94,0.0,0.9531,Instagram Insights
+search_trend_spike,117.84,0.0,0.8172,TikTok Trends
+social_media_trend,191.96,0.0,0.8171,ESPN Analytics
+sports_event_trigger,52.22,0.0,0.9091,Reuters
+social_media_trend,182.59,0.0,0.9552,Reuters
+competitor_pricing_change,122.94,0.0,0.8646,Google Trends
+influencer_endorsement,124.15,0.0,0.9439,TikTok Trends
+competitor_pricing_change,37.65,0.0,0.7662,Reuters
+competitor_pricing_change,36.42,0.0,0.8251,Reuters
+competitor_pricing_change,90.69,0.0,0.6994,Instagram Insights
+competitor_pricing_change,2.5,0.0,0.8034,ESPN Analytics
+economic_indicator,148.28,0.0,0.7126,Bloomberg
+social_media_trend,156.04,0.0,0.9741,TikTok Trends
+economic_indicator,58.6,0.0,0.6159,Google Trends
+competitor_pricing_change,182.34,0.0,0.7522,Google Trends
+economic_indicator,40.64,0.0,0.7076,ESPN Analytics
+economic_indicator,121.13,0.0,0.6559,NOAA
+influencer_endorsement,92.16,0.0,0.6671,TikTok Trends
+weather_impact,158.15,0.0,0.6658,NOAA
+competitor_pricing_change,175.86,0.0,0.6654,ESPN Analytics
+influencer_endorsement,139.99,0.0,0.7646,Instagram Insights
+search_trend_spike,91.04,0.0,0.6069,AccuWeather API
+sports_event_trigger,31.9,0.0,0.8271,Reuters
+competitor_pricing_change,153.81,0.0,0.912,ESPN Analytics
+influencer_endorsement,163.86,0.0,0.8623,Bloomberg
+influencer_endorsement,24.64,0.0,0.7067,ESPN Analytics
+weather_impact,120.01,0.0,0.9761,NOAA
+weather_impact,63.37,0.0,0.8038,Instagram Insights
+competitor_pricing_change,187.74,0.0,0.6435,Bloomberg
+influencer_endorsement,1000.0,0.0,0.6961,Instagram Insights
+sports_event_trigger,107.35,0.0,0.6047,AccuWeather API
+influencer_endorsement,106.7,0.0,0.6827,Bloomberg
+economic_indicator,183.04,0.0,0.8857,AccuWeather API
+economic_indicator,13.47,0.0,0.6813,Reuters
+influencer_endorsement,29.06,0.0,0.9586,Bloomberg
+economic_indicator,123.72,0.0,0.9461,NOAA
+social_media_trend,96.29,0.0,0.9967,NOAA
+weather_impact,102.1,0.0,0.6537,ESPN Analytics
+competitor_pricing_change,87.15,0.0,0.8957,TikTok Trends
+sports_event_trigger,103.29,0.0,0.7031,AccuWeather API
+sports_event_trigger,129.9,0.0,0.9098,NOAA
+social_media_trend,142.86,0.0,0.9504,Google Trends
+weather_impact,183.42,0.0,0.9926,ESPN Analytics
+economic_indicator,22.53,0.0,0.6563,Bloomberg
+competitor_pricing_change,44.86,0.0,0.9257,ESPN Analytics
+search_trend_spike,16.07,0.0,0.7189,Bloomberg
+sports_event_trigger,165.01,0.0,0.8634,NOAA
+competitor_pricing_change,21.18,0.0,0.9019,Instagram Insights
+competitor_pricing_change,158.92,0.0,0.8996,Bloomberg
+weather_impact,78.22,0.0,0.9396,ESPN Analytics
+influencer_endorsement,181.44,0.0,0.7446,AccuWeather API
+weather_impact,148.64,0.0,0.8893,Reuters
+influencer_endorsement,90.21,0.0,0.9811,Google Trends
+search_trend_spike,149.0,0.0,0.8087,Bloomberg
+weather_impact,34.18,0.0,0.7436,Reuters
+influencer_endorsement,99.51,0.0,0.8795,TikTok Trends
+weather_impact,124.27,0.0,0.9277,TikTok Trends
+social_media_trend,179.08,0.0,0.9983,Google Trends
+competitor_pricing_change,42.43,0.0,0.9675,Google Trends
+search_trend_spike,129.12,0.0,0.9151,TikTok Trends
+economic_indicator,143.82,0.0,0.8385,Bloomberg
+competitor_pricing_change,65.83,0.0,0.7991,Instagram Insights
+search_trend_spike,36.92,0.0,0.9526,Reuters
+search_trend_spike,173.38,0.0,0.8011,ESPN Analytics
+sports_event_trigger,112.53,0.0,0.7814,Bloomberg
+influencer_endorsement,73.89,0.0,0.7139,Reuters
+social_media_trend,138.98,0.0,0.7147,AccuWeather API
+competitor_pricing_change,152.78,0.0,0.7566,ESPN Analytics
+sports_event_trigger,168.27,0.0,0.7249,Instagram Insights
+weather_impact,67.64,0.0,0.9952,ESPN Analytics
+competitor_pricing_change,187.15,0.0,0.8483,TikTok Trends
+economic_indicator,110.35,0.0,0.6825,ESPN Analytics
+search_trend_spike,13.07,0.0,0.6723,TikTok Trends
+sports_event_trigger,149.85,0.0,0.8045,TikTok Trends
+sports_event_trigger,173.41,0.0,0.7824,ESPN Analytics
+social_media_trend,10.6,0.0,0.7259,NOAA
+social_media_trend,34.55,0.0,0.8345,Instagram Insights
+social_media_trend,115.49,0.0,0.9817,Reuters
+competitor_pricing_change,116.91,0.0,0.7698,TikTok Trends
+competitor_pricing_change,41.42,0.0,0.7069,AccuWeather API
+sports_event_trigger,108.61,0.0,0.6163,Bloomberg
+competitor_pricing_change,92.62,0.0,0.941,ESPN Analytics
+weather_impact,29.56,0.0,0.9288,TikTok Trends
+weather_impact,131.69,0.0,0.7063,Google Trends
+economic_indicator,162.22,0.0,0.6169,Reuters
+influencer_endorsement,119.43,0.0,0.7235,Instagram Insights
+economic_indicator,95.41,0.0,0.7441,ESPN Analytics
+social_media_trend,80.78,0.0,0.8832,Bloomberg
+competitor_pricing_change,56.9,0.0,0.6148,Instagram Insights
+economic_indicator,146.78,0.0,0.7112,ESPN Analytics
+competitor_pricing_change,181.55,0.0,0.9392,Google Trends
+social_media_trend,48.82,0.0,0.6958,Instagram Insights
+economic_indicator,112.47,0.0,0.9143,AccuWeather API
+influencer_endorsement,43.9,0.0,0.6059,Reuters
+influencer_endorsement,17.44,0.0,0.8166,AccuWeather API
+competitor_pricing_change,137.48,0.0,0.8675,TikTok Trends
+weather_impact,161.18,0.0,0.6202,Bloomberg
+weather_impact,73.84,0.0,0.9436,TikTok Trends
+social_media_trend,14.68,0.0,0.7213,Bloomberg
+weather_impact,1000.0,0.0,0.9147,NOAA
+competitor_pricing_change,41.26,0.0,0.6225,Bloomberg
+influencer_endorsement,98.4,0.0,0.9397,AccuWeather API
+influencer_endorsement,42.03,0.0,0.7786,Reuters
+search_trend_spike,106.66,0.0,0.7375,ESPN Analytics
+weather_impact,178.04,0.0,0.6642,ESPN Analytics
+economic_indicator,46.02,0.0,0.9095,Reuters
+sports_event_trigger,3.04,0.0,0.9327,Bloomberg
+search_trend_spike,104.1,0.0,0.8924,ESPN Analytics
+weather_impact,145.96,0.0,0.9771,Google Trends
+economic_indicator,181.92,0.0,0.881,TikTok Trends
+social_media_trend,88.7,0.0,0.6618,TikTok Trends
+influencer_endorsement,67.59,0.0,0.8302,Reuters
+social_media_trend,182.59,0.0,0.9583,Instagram Insights
+economic_indicator,11.53,0.0,0.9244,Bloomberg
+social_media_trend,25.6,0.0,0.7652,Bloomberg
+weather_impact,66.14,0.0,0.7046,AccuWeather API
+social_media_trend,147.31,0.0,0.9769,Bloomberg
+social_media_trend,14.09,0.0,0.6002,AccuWeather API
+economic_indicator,147.19,0.0,0.6203,TikTok Trends
+competitor_pricing_change,1000.0,0.0,0.9605,Reuters
+social_media_trend,30.09,0.0,0.7714,NOAA
+competitor_pricing_change,189.27,0.0,0.8814,Bloomberg
+influencer_endorsement,82.96,0.0,0.6343,AccuWeather API
+influencer_endorsement,155.72,0.0,0.6947,Bloomberg
+influencer_endorsement,82.53,0.0,0.7862,Bloomberg
+social_media_trend,168.36,0.0,0.8523,ESPN Analytics
+economic_indicator,143.29,0.0,0.6993,Reuters
+sports_event_trigger,49.32,0.0,0.6785,Bloomberg
+competitor_pricing_change,28.93,0.0,0.9018,AccuWeather API
+search_trend_spike,14.74,0.0,0.6676,Instagram Insights
+influencer_endorsement,46.93,0.0,0.7874,AccuWeather API
+influencer_endorsement,16.22,0.0,0.8411,ESPN Analytics
+search_trend_spike,149.3,0.0,0.8275,Reuters
+competitor_pricing_change,78.12,0.0,0.9482,Reuters
+influencer_endorsement,71.71,0.0,0.9391,Bloomberg
+economic_indicator,121.55,0.0,0.7075,Bloomberg
+social_media_trend,164.91,0.0,0.778,ESPN Analytics
+weather_impact,65.66,0.0,0.8426,ESPN Analytics
+influencer_endorsement,117.15,0.0,0.7961,Instagram Insights
+social_media_trend,15.7,0.0,0.9003,AccuWeather API
+social_media_trend,105.34,0.0,0.7232,Reuters
+economic_indicator,133.14,0.0,0.6231,TikTok Trends
+search_trend_spike,181.87,0.0,0.6746,Bloomberg
+weather_impact,59.14,0.0,0.786,Reuters
+competitor_pricing_change,99.67,0.0,0.7319,Instagram Insights
+economic_indicator,96.27,0.0,0.9797,ESPN Analytics
+competitor_pricing_change,132.67,0.0,0.7859,Instagram Insights
+competitor_pricing_change,138.44,0.0,0.8966,TikTok Trends
+weather_impact,95.05,0.0,0.9213,Bloomberg
+search_trend_spike,121.93,0.0,0.8057,ESPN Analytics
+economic_indicator,68.26,0.0,0.7786,Reuters
+sports_event_trigger,120.59,0.0,0.6775,NOAA
+sports_event_trigger,124.86,0.0,0.7262,ESPN Analytics
+social_media_trend,113.02,0.0,0.9419,NOAA
+economic_indicator,25.06,0.0,0.6331,TikTok Trends
+search_trend_spike,51.79,0.0,0.9974,Reuters
+weather_impact,30.22,0.0,0.7857,ESPN Analytics
+weather_impact,1.28,0.0,0.913,ESPN Analytics
+sports_event_trigger,58.22,0.0,0.965,Reuters
+influencer_endorsement,108.72,0.0,0.7386,NOAA
+weather_impact,121.68,0.0,0.9199,Bloomberg
+sports_event_trigger,19.05,0.0,0.637,Instagram Insights
+competitor_pricing_change,100.51,0.0,0.7142,ESPN Analytics
+competitor_pricing_change,44.93,0.0,0.818,Reuters
+weather_impact,198.24,0.0,0.7445,Reuters
+weather_impact,7.35,0.0,0.7062,NOAA
+economic_indicator,162.61,0.0,0.6218,Bloomberg
+economic_indicator,5.92,0.0,0.8591,Instagram Insights
+search_trend_spike,165.15,0.0,0.7179,NOAA
+search_trend_spike,135.78,0.0,0.992,Bloomberg
+competitor_pricing_change,110.01,0.0,0.8329,ESPN Analytics
+influencer_endorsement,63.43,0.0,0.6212,Instagram Insights
+sports_event_trigger,166.07,0.0,0.9951,Google Trends
+social_media_trend,87.08,0.0,0.8045,Instagram Insights
+search_trend_spike,137.59,0.0,0.9862,Bloomberg
+sports_event_trigger,106.26,0.0,0.6922,Instagram Insights
+weather_impact,79.17,0.0,0.9354,AccuWeather API
+competitor_pricing_change,58.35,0.0,0.7586,AccuWeather API
+social_media_trend,79.64,0.0,0.7829,Bloomberg
+competitor_pricing_change,54.71,0.0,0.6607,Google Trends
+weather_impact,93.67,0.0,0.7172,Instagram Insights
+weather_impact,190.97,0.0,0.9976,NOAA
+sports_event_trigger,148.39,0.0,0.9768,AccuWeather API
+social_media_trend,1000.0,0.0,0.7104,ESPN Analytics
+social_media_trend,62.82,0.0,0.6135,Google Trends
+competitor_pricing_change,173.53,0.0,0.9776,TikTok Trends
+competitor_pricing_change,62.29,0.0,0.6135,Google Trends
+sports_event_trigger,77.19,0.0,0.6303,ESPN Analytics
+competitor_pricing_change,126.33,0.0,0.9172,Bloomberg
+competitor_pricing_change,198.71,0.0,0.8217,Bloomberg
+sports_event_trigger,35.58,0.0,0.8077,Google Trends
+social_media_trend,113.36,0.0,0.9918,Bloomberg
+social_media_trend,120.92,0.0,0.7204,Instagram Insights
+influencer_endorsement,154.75,0.0,0.8663,ESPN Analytics
+search_trend_spike,11.29,0.0,0.7067,ESPN Analytics
+search_trend_spike,68.86,0.0,0.8001,TikTok Trends
+weather_impact,197.0,0.0,0.8664,Reuters
+competitor_pricing_change,78.43,0.0,0.6406,Google Trends
+influencer_endorsement,33.99,0.0,0.8248,Instagram Insights
+weather_impact,25.11,0.0,0.6567,Google Trends
+economic_indicator,196.42,0.0,0.9101,NOAA
+influencer_endorsement,194.18,0.0,0.8577,Bloomberg
+sports_event_trigger,162.76,0.0,0.7964,Google Trends
+sports_event_trigger,73.06,0.0,0.9607,NOAA
+competitor_pricing_change,68.51,0.0,0.7373,Bloomberg
+weather_impact,126.09,0.0,0.6608,Google Trends
+search_trend_spike,17.21,0.0,0.8838,TikTok Trends
+sports_event_trigger,169.68,0.0,0.6025,Google Trends
+weather_impact,22.21,0.0,0.6295,NOAA
+economic_indicator,158.91,0.0,0.6141,NOAA
+influencer_endorsement,164.11,0.0,0.9448,Google Trends
+sports_event_trigger,67.97,0.0,0.7083,ESPN Analytics
+influencer_endorsement,82.69,0.0,0.793,ESPN Analytics
+social_media_trend,191.78,0.0,0.6506,ESPN Analytics
+economic_indicator,13.83,0.0,0.9719,TikTok Trends
+sports_event_trigger,181.04,0.0,0.6712,Reuters
+economic_indicator,20.92,0.0,0.6594,Reuters
+social_media_trend,162.2,0.0,0.9766,Google Trends
+social_media_trend,14.44,0.0,0.7354,NOAA
+competitor_pricing_change,79.15,0.0,0.6597,Bloomberg
+economic_indicator,139.43,0.0,0.925,Instagram Insights

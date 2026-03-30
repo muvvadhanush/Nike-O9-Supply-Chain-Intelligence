@@ -1,0 +1,4 @@
+constraint_type,entity,description,limit_value,unit,start_date,end_date,constraint_id
+budget,GLOBAL-FY26Q4,Max freight budget,750000.0,USD,2026-03-01,2026-05-31,COST-001
+capacity,Memphis-DC01,Max weekly outbound,250000.0,units,2026-03-01,2026-12-31,CAP-001
+sustainability,ASIA-TO-NA,Max CO2 per unit,4.0,kg,2026-03-01,2026-12-31,SUS-001

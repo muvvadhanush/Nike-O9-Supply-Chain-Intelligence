@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-03-25 01:43:11",
+  "total_scenarios": 3,
+  "metrics": {
+    "accuracy": 100.0,
+    "avg_latency_ms": 35421.89,
+    "pass_rate": 1.0
+  },
+  "details": [
+    {
+      "scenario_id": 0,
+      "ground_truth_scenario_id": "SC-001",
+      "ground_truth_match": true,
+      "legacy_keyword_match": false,
+      "use_case": "DEMAND_SURGE",
+      "latency_ms": 37502.62,
+      "result": "PASS",
+      "recommendation": "[DEMAND_SURGE] Standard Ocean Freight (Memphis/Guangzhou Link)",
+      "reason": "ground-truth token overlap (row SC-001)"
+    },
+    {
+      "scenario_id": 1,
+      "ground_truth_scenario_id": "SC-009",
+      "ground_truth_match": true,
+      "legacy_keyword_match": false,
+      "use_case": "INVENTORY_REBALANCING",
+      "latency_ms": 38707.1,
+      "result": "PASS",
+      "recommendation": "[INVENTORY_REBALANCING] Standard Ocean Freight (Memphis to Atlanta Transfer)",
+      "reason": "ground-truth token overlap (row SC-009)"
+    },
+    {
+      "scenario_id": 2,
+      "ground_truth_scenario_id": "SC-015",
+      "ground_truth_match": true,
+      "legacy_keyword_match": true,
+      "use_case": "SUPPLIER_CONSTRAINT",
+      "latency_ms": 30055.77,
+      "result": "PASS",
+      "recommendation": "[SUPPLIER_CONSTRAINT] Standard Ocean Freight (Chennai/Saigon Backup)",
+      "reason": "ground-truth token overlap (row SC-015)"
+    }
+  ]
+}

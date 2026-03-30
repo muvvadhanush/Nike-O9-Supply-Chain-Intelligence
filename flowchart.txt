@@ -1,0 +1,639 @@
+Demand Surge (scenario -1) - user clicks Orchestrator should call the agents one by one 
+                                                               Orchestrator
+                                                                        |
+       --------------------------------------------------------------------------------------------|----------------------------|
+       |                                                                                   |                                                  |                                        |
+Signal Ingestion Agent(ML Algorythm Used)       Demand Surge Classifier                      Signal Analysis            Simulation Agent(ML Algorithym Used)                                                                                                                        
+                                                                                                                                                                                        |
+                                                                                                                                                                                      KPI--------------- Generated Recommendations(Options)
+                                                                                                                                                                                                                           |
+                                                                                                                                                                                              Recommendations (By LLM Agent)
+
+Inventory rebalance (Scenario 2)
+                                                               Orchestrator
+                                                                        |
+       ----------------------------------------------------------------------------------------------------------------------------------------------
+       |                                                             |                                          |                                   |
+Inventory Ingestion Agent(ML Algorythm Used)       Inventory Rebalancing Classifier                     Inventory Analysis            Simulation Agent(ML Algorithym Used)
+                                                                                                                                                                                                                   |
+                                                                                                                                                                                                                  KPI--------------- Generated Recommendations(Option)
+                                                                                                                                                                                                                                                      |
+                                                                                                                                                                                                                  Recommendations (By LLM Agent)
+
+Supplier Disruption (Scenario 3)
+                                                               Orchestrator
+                                                                        |
+       -----------------------------------------------------------------|------------------------------------------------
+       |                                                                 |                                                         |                                        |
+Supplier dataset                Supplier Disruption Classifier                            Supplier Analysis            Simulation Agent(ML Algorithym Used)
+                                                                                                                                                                            |
+                                                                                                                                                                         KPI--------------- Generated Recommendations(option)
+                                                                                                                                                                                                                 |
+                                                                                                                                                                                              Recommendations (By LLM Agent)
+
+
+
+
+1. Claude AI Agent POC for Nike Apparel Supply Chain Planning
+Integration with O9 Solutions Platform
+Prepared for: Nike Supply Chain Planning Team
+Prepared by: Algoleap
+Date: March 14, 2026
+POC Duration: 2-3 days
+________________________________________
+Executive Summary
+This document outlines a proof-of-concept (POC) for building Claude-based AI agents on top of Nike's O9 Solutions planning platform using high-fidelity synthetic data and an O9 API mock layer. This POC demonstrates how agentic AI can provide objective, scenario-based recommendations that planning teams can act upon, enhancing decision-making in apparel supply chain operations[1][2].
+The proposed solution layers Claude's reasoning capabilities over O9's Digital Brain to deliver autonomous analysis, multi-scenario simulations, and actionable recommendations for demand planning, inventory optimization, and disruption response[3][4]. This POC serves as Phase 0 (architecture and logic validation) in a two-step path toward production deployment; a subsequent Phase 1 live-data pilot will confirm business ROI with actual Nike data.
+Alignment with Nike's AI & Digital Strategy:
+This POC extends Nike's existing AI investments in demand prediction, personalization, and logistics optimization[146][156]. The Claude agent layer acts as the "decisioning brain" that sits atop Nike's AI/ML models, turning predictions into coordinated supply chain actions. This ensures the physical supply chain keeps pace with digital demand shifts from Nike's CDP and personalization platforms[145][153], while operationalizing Nike's Scope 3 sustainability commitments through CO2-aware scenario evaluation[94][149].
+What This POC Proves:
+	Technical feasibility of Claude agents integrated with O9 platform architecture
+	Decision logic quality and scenario reasoning capabilities on realistic synthetic data
+	Rigorous evaluation framework (statistical validation, human-in-loop assessment)
+	Foundation for production-scale deployment with clear governance and guardrails
+What This POC Does NOT Prove:
+	Realized dollar ROI at Nike (requires live-data pilot to measure actual business impact)
+	Live integration into Nike's production O9 tenant (uses mock API layer only)
+	Autonomous execution without human oversight (all recommendations require planner approval)
+	Replacement of human planners (positions agents as decision support, not automation)
+	Production-ready security and compliance (POC uses synthetic data with no real Nike transactional records)
+________________________________________
+POC Objectives
+	Demonstrate Claude agent integration with O9 mock API layer (GraphQL/REST) using high-fidelity synthetic data calibrated to apparel industry benchmarks
+	Showcase scenario-based decision-making for 3 critical supply chain use cases with leading apparel supply chain KPI ranges (to be calibrated with Nike's actual targets)
+	Prove objective recommendation generation that planners can review and approve (agents never directly commit changes)
+	Validate technical feasibility and architecture patterns within Nike's O9 ecosystem without requiring live data access or production tenant changes
+	Establish rigorous evaluation framework with statistical validation, Monte Carlo robustness testing, and human-in-loop assessment
+	Deliver production-aligned foundation for scaled agentic AI deployment, with clear path to Phase 1 live pilot
+	Demonstrate exception management and risk mitigation capabilities (surge, disruption, stockout scenarios) as primary value theme[118][119][155]
+	Define clear data governance and security responsibilities for POC and future phases
+________________________________________
+Data Governance and Security
+POC Data Responsibilities:
+	Data Ownership: Algoleap retains ownership of synthetic datasets; Nike retains all rights to decision logic, KPI calibrations, and evaluation frameworks developed during POC
+	No Real Nike Data: This POC uses 100% synthetic data with no real Nike transactional records, supplier contracts, or customer information
+	API Key Management: Nike IT Security will provision isolated O9 sandbox API credentials (read-only access); Anthropic API keys managed via Algoleap secure vault with key rotation every 30 days
+	Data Storage: All POC data and agent logs stored in AWS S3 buckets with encryption at rest (AES-256) and in transit (TLS 1.3); retention period: 90 days post-POC completion, then automatic deletion
+	Access Controls: Role-based access control (RBAC) enforced; only designated Nike planning SMEs and Algoleap technical team have access; all access logged and auditable
+	Audit Trail: Complete logging of all agent interactions, O9 API calls, and recommendation generation; logs retained for 90 days with daily integrity checks
+Phase 1 Pilot Security Requirements:
+When transitioning to live Nike data in Phase 1 pilot, additional security measures will be implemented:
+	Nike InfoSec review and approval of data access patterns
+	VPN-based secure connectivity to production O9 tenant
+	Data masking for sensitive supplier pricing and contract terms
+	Nike SOC 2 Type II compliance validation for agent infrastructure
+	Incident response plan with defined escalation paths
+	Quarterly security audits and penetration testing
+________________________________________
+POC Enhancements for Synthetic Data Validation
+This POC is designed to deliver high-confidence results using only synthetic data, eliminating the need for live O9 access during initial evaluation. Three critical enhancements ensure realistic, credible demonstration of agent capabilities[90][95][96].
+Enhancement 1: Advanced Synthetic Data Generation
+High-Fidelity Data Modeling:
+	Hierarchical SKU Structure: 10,000+ product records spanning Air Max variants, apparel lines, basketball footwear with realistic attribute correlations
+	Regional Demand Volatility: EMEA market surges (fashion weeks, sporting events), Americas seasonal patterns, APAC growth trajectories
+	Supplier Network Realism: Vietnam/Indonesia/Bangladesh/China suppliers with authentic lead times (14-35 days), capacity constraints, quality variance
+	Disruption Scenarios: 10% black swan events (factory delays, tariff shocks, weather impacts) calibrated to historical Nike supply chain incidents[77][80]
+	Correlation Modeling: Weather-sales relationships (heat waves boost running apparel 18-25%), social media sentiment-demand spikes, competitor pricing impacts
+Generation Methodology:
+Starting from manually crafted seed patterns (24 rows across 4 CSV files), we expand to 1,500+ rows using transparent scripted generation with realistic noise, correlations, and edge cases[90][95]. Optionally, SDV/Gretel libraries can further refine distributions for enhanced fidelity. This approach creates statistically valid datasets that preserve:
+	Multivariate distributions matching apparel industry benchmarks (validated against published data)
+	Temporal dependencies (seasonal demand, lead time variability calibrated to Asia-to-US/EU supply chains)
+	Constraint satisfaction (inventory ≥ 0, utilization ≤ 1.0, supplier capacity limits)
+	Edge case representation (10% black swan events: stockouts, disruptions, quality failures)
+Synthetic Data Limitations:
+While synthetic data validates logic, robustness, and relative agent performance, it cannot by itself prove financial ROI or capture all real-world edge cases. This POC establishes technical feasibility; a Phase 1 live-data pilot is required to confirm actual business value with Nike production data[65][90][121][126].
+Data Validation Criteria:
+Validation Test	Method	Target
+Statistical similarity	Kolmogorov-Smirnov test vs industry benchmarks	p > 0.05
+Correlation preservation	Pearson correlation for key variable pairs	r > 0.85
+Constraint compliance	Range checks, referential integrity	100%
+Edge case coverage	Disruption event frequency analysis	8-12%
+
+Table 1: Synthetic data quality validation framework
+Enhancement 2: Nike-Specific KPI Integration
+Embedded Performance Targets:
+All agent scenarios output quantified impacts against leading apparel supply chain KPI benchmarks (to be calibrated with Nike's actual performance targets during kickoff)[94][102][131][132]:
+	On-Time In-Full (OTIF): Target 92-96% (DTC operations; wholesale typically 88-93%)
+	Inventory Turnover: Target 4-6x annually (aligned with Nike's current ~3.5x and industry-leading 6x benchmarks)[134][139]
+	Fill Rate: Target 95-98% for core SKUs, 92-95% for seasonal items
+	Forecast Accuracy (MAPE): Target 8-15% for 4-week horizon (AI-enhanced vs traditional 15-25%)[123][128]
+	Stockout Rate: Target <2% across distribution network
+	Excess Inventory: Target <5% above optimal levels
+	Supply Chain Sustainability Index (SCSI): CO2 impact per recommendation measured against Nike's Scope 3 reduction goals and <1% inbound air freight guardrail[94][149]
+Note: These ranges represent published benchmarks from leading apparel and retail supply chains. Exact Nike targets will be confirmed during kickoff to ensure POC dashboards and metrics align with Nike's actual KPI definitions and performance baselines.
+Agent Output Enhancement:
+Every recommendation now includes:
+	Dollar Impact: Precise cost/savings calculations ($50M tariff avoidance, $320K expedite cost)
+	KPI Delta: Before/after comparison (Fill Rate: 87% → 96%, OTIF: 91% → 97%)
+	Sustainability Score: CO2 impact for air freight vs ocean, supplier compliance ratings
+	Risk-Adjusted NPV: Multi-scenario expected value analysis with probability weighting
+	Confidence Intervals: Statistical ranges for forecast impacts (±15% at 95% confidence)
+Enhancement 3: Rigorous Validation Framework
+Multi-Level Evaluation Approach:
+Validation Layer	Method	Success Criteria
+Statistical	KS-test agent decisions vs baseline heuristics; correlation analysis	Agent outperforms 70%+ scenarios
+Simulation	100+ Monte Carlo runs with demand/supply variability	Robust performance across 85% of runs
+Human Evaluation	Mock planners score recommendations (relevance, actionability)	Avg rating >4.2/5.0
+Failure Analysis	Red team adversarial scenarios (extreme disruptions)	Graceful degradation, no catastrophic errors
+
+Table 2: POC validation framework with acceptance criteria
+Baseline Comparison:
+Agent recommendations benchmarked against:
+	Rule-based heuristics: Simple threshold-triggered actions (reorder when stock <20%)
+	Historical planner decisions: Anonymized Nike decision patterns from similar scenarios
+	Industry best practices: O9 platform default optimization algorithms
+Audit Trail & Explainability:
+	Complete reasoning chain logged for each recommendation (data sources, calculations, trade-off analysis)
+	Counterfactual analysis: "What would have happened under alternative scenarios?"
+	Sensitivity analysis: Impact of ±20% demand variance, ±5 days lead time changes
+	Rejection tracking: When agent recommendations are overridden by planners, capture rationale for learning
+________________________________________
+Technical Architecture
+System Components
+
+Figure 1: Claude Agent Architecture with O9 Integration
+Integration Points:
+	O9 Platform API: GraphQL/REST endpoints for data extraction and scenario execution[5][6]
+	Claude API: Anthropic Claude 3.5 Sonnet for agentic reasoning and tool orchestration[7]
+	Data Layer: Staging APIs for ingesting demand forecasts, inventory levels, supplier data[8]
+	Action Layer: Webhook/API callbacks to O9 for automated scenario execution
+	UI Dashboard: Simple interface for planners to review and approve recommendations
+Data Flow
+	Claude agent queries O9 via GraphQL for current planning state
+	Agent processes data using built-in reasoning and scenario simulation tools
+	Multi-scenario analysis evaluates trade-offs (cost, time, risk)
+	Structured recommendations generated with confidence scores
+	Planner reviews and approves actions via dashboard
+	Approved scenarios executed in O9 via API callbacks
+________________________________________
+POC Scenarios
+Scenario 1: Demand Surge Response
+Business Context: Sudden 30% spike in Air Max sneaker demand detected from social media trends and early sales signals.
+Agent Workflow:
+	Pull current demand forecast from O9 for Air Max SKUs (next 8 weeks)
+	Analyze inventory positions across Nike distribution centers
+	Query supplier capacity and lead times from O9 supplier collaboration module
+	Generate 3 response scenarios with trade-off analysis
+	Recommend optimal scenario with execution steps
+Sample Agent Query to O9:
+query GetDemandAndInventory {
+demandPlanning {
+forecast(
+productFamily: "Air Max",
+horizon: "8W",
+scenario: "baseline"
+) {
+sku
+week
+forecastUnits
+actualSales
+forecastAccuracy
+}
+}
+inventory {
+currentStock(productFamily: "Air Max") {
+sku
+locationId
+onHandUnits
+inTransitUnits
+safetyStockLevel
+}
+}
+suppliers {
+capacityAvailability(productFamily: "Air Max") {
+supplierId
+supplierName
+weeklyCapacity
+currentUtilization
+leadTimeDays
+}
+}
+}
+Scenario Outputs Generated by Claude:
+Scenario	Description	Cost Impact	Lead Time	Risk Level
+A: Accelerate Current Orders	Fast-track existing supplier orders via air freight	+$450K	7 days	Low
+B: Activate Secondary Supplier	Engage Vietnam backup supplier with 20% premium	+$280K	14 days	Medium
+C: Hybrid Approach	60% air freight + 40% secondary supplier	+$320K	10 days	Low
+
+Table 3: Demand surge response scenarios with trade-off analysis
+Agent Recommendation (Enhanced with Nike KPIs):
+"Scenario C (Hybrid Approach) optimally balances cost (+$320K vs baseline), speed (10-day fulfillment), and risk diversification.
+Quantified Impact:
+	Fill Rate: 94% maintained (vs 67% no-action scenario) → Avoids $1.8M lost sales
+	OTIF Performance: 96% (exceeds 95% target)
+	Cost-Benefit: Net positive $1.48M (avoided lost sales $1.8M - expedite cost $320K)
+	Sustainability Impact: +48 tons total CO2 (~2.4 kg/unit average uplift from air freight vs ocean baseline; within Nike's <1% inbound air freight policy guideline)[94][149]
+	Risk Score: 2.1/10 (Low) - dual sourcing mitigates single-supplier dependency
+Action Steps:
+	Approve 15,000 units air freight from primary supplier (execution lead time: 7 days)
+	Place 10,000-unit order with Vietnam secondary supplier (delivery: 14 days)
+	Monitor sell-through daily; trigger additional capacity if sales exceed +35%
+Confidence Level: 87% (based on 150 historical demand surge scenarios, correlation r=0.89)"
+________________________________________
+Scenario 2: Inventory Rebalancing Across DCs
+Business Context: Distribution center analysis shows Denver overstock (+40% above optimal) in running apparel while Atlanta faces potential stockout (-15% below safety stock).
+Agent Workflow:
+	Monitor O9 inventory alerts for safety stock breaches and overstock conditions
+	Analyze transportation costs and lead times between DC pairs
+	Simulate demand patterns for both regions (next 4 weeks)
+	Calculate optimal transfer quantities considering carrying costs
+	Generate multi-echelon rebalancing recommendations
+Sample O9 Data Structure:
+{
+"inventoryAlerts": [
+{
+"dcLocation": "Denver-DC01",
+"productCategory": "Running Apparel - Women",
+"currentStock": 28500,
+"optimalStock": 20000,
+"excessUnits": 8500,
+"carryingCostPerUnit": 2.40
+},
+{
+"dcLocation": "Atlanta-DC03",
+"productCategory": "Running Apparel - Women",
+"currentStock": 8200,
+"safetyStockLevel": 9500,
+"shortfallUnits": 1300,
+"stockoutRiskDays": 6
+}
+],
+"transportOptions": [
+{
+"origin": "Denver-DC01",
+"destination": "Atlanta-DC03",
+"transitDays": 3,
+"costPerUnit": 1.85,
+"capacity": 12000
+}
+]
+}
+Agent Recommendation (Enhanced with Nike KPIs):
+"Transfer 6,500 units Running Apparel - Women from Denver to Atlanta.
+Quantified Impact:
+	Stockout Prevention: Atlanta coverage extended by 18 days (risk eliminated)
+	Fill Rate Improvement: Atlanta DC 84% → 97% (exceeds 95% target)
+	Inventory Optimization: Denver excess reduced 76% (from +40% to +9.6% above optimal)
+	Inventory Turns: Network-wide improvement from 3.4x to 3.9x annually (progressing toward industry-leading 5-6x target)
+	Net Cost Savings: $8,200 (avoided stockout $22K - transfer $12K - carrying reduction $1.8K)
+	OTIF Impact: Network OTIF 93% → 96% (meets target)
+	Sustainability: Consolidated LTL shipment: 0.18 tons CO2 (efficient routing)
+Action Steps:
+	Initiate 6,500-unit transfer order in O9 inventory module
+	Schedule LTL pickup from Denver-DC02 within 24 hours
+	Update Atlanta-DC03 safety stock model based on revised demand signal (+12% adjustment)
+Confidence Level: 92% (validated against 220 historical rebalancing events, KS-test p=0.73)"
+________________________________________
+Scenario 3: Supplier Disruption Recovery
+Business Context: Primary fabric supplier in Bangladesh reports 3-week production delay due to equipment failure, affecting 40% of Spring apparel line production.
+Agent Workflow:
+	Receive O9 disruption alert with impacted SKUs and quantities
+	Query alternative supplier database with capability matching
+	Simulate production schedule shifts and launch date impacts
+	Evaluate quality/compliance records for alternative suppliers
+	Generate ranked recovery scenarios with risk assessment
+Sample Supplier Evaluation Data:
+{
+"disruptionEvent": {
+"supplierId": "BGD-FAB-001",
+"supplierName": "Dhaka Textiles Ltd",
+"affectedPOs": ["PO-45821", "PO-45823", "PO-45829"],
+"impactedSKUs": 127,
+"totalUnits": 245000,
+"delayDays": 21,
+"productionWindow": "2026-04-15 to 2026-05-06"
+},
+"alternativeSuppliers": [
+{
+"supplierId": "VNM-FAB-008",
+"supplierName": "Saigon Premium Fabrics",
+"fabricMatch": "95%",
+"weeklyCapacity": 85000,
+"currentUtilization": 0.72,
+"leadTimeDays": 18,
+"qualityScore": 4.6,
+"costPremium": 0.12,
+"complianceRating": "A"
+},
+{
+"supplierId": "IND-FAB-023",
+"supplierName": "Chennai Textile Group",
+"fabricMatch": "88%",
+"weeklyCapacity": 120000,
+"currentUtilization": 0.65,
+"leadTimeDays": 14,
+"qualityScore": 4.3,
+"costPremium": 0.08,
+"complianceRating": "B+"
+}
+]
+}
+Scenario Comparison Generated by Claude:
+Scenario	Action	Launch Impact	Cost	Quality Risk
+1: Wait for Primary	Delay Spring line launch, maintain supplier relationship	+21 days	$0	None
+2: Full Switch to VNM-FAB-008	Transfer all 245K units, premium fabric quality	+18 days	+$354K	Low
+3: Split: 60% VNM / 40% IND	Diversify risk, partial volume to India supplier	+18 days	+$276K	Medium
+4: Expedite Primary + Partial Alt	Rush repairs ($80K), cover 30% with VNM backup	+14 days	+$186K	Low
+
+Table 4: Supplier disruption recovery scenarios
+Agent Recommendation (Enhanced with Nike KPIs):
+"Scenario 4 (Expedite + Partial Alternative) optimally minimizes launch delay and cost while preserving supplier relationships.
+Quantified Impact:
+	Launch Delay: 14 days (vs 21-day baseline) → 33% reduction in time-to-market impact
+	Revenue Protection: Spring line launch revenue preserved: $8.2M (92% of planned $8.9M)
+	Total Cost: +$186K (expedite $80K + alt supplier premium $106K)
+	Risk-Adjusted NPV: +$420K vs Scenario 2 (full switch), +$234K vs Scenario 1 (wait)
+	OTIF Performance: 94% maintained (slightly below 95% target due to partial delay)
+	Supplier Relationship: Primary supplier retained (strategic for long-term capacity)
+	Quality Risk: Low (VNM-FAB-008 has 4.6/5.0 quality score, 95% fabric match)
+	Sustainability: Mixed ocean/air shipment: +1.8 tons CO2 (acceptable within budget)
+Action Steps:
+	Authorize $80K emergency equipment repair for BGD-FAB-001 (approval required: VP Operations)
+	Place 75,000-unit order with VNM-FAB-008 within 48 hours (secure capacity allocation)
+	Establish weekly progress monitoring with both suppliers (contingency triggers defined)
+	Update Spring line launch communication: 2-week delay for 40% of SKUs, prioritize hero products
+Confidence Level: 89% (Monte Carlo simulation of 180 disruption scenarios, sensitivity analysis ±20% capacity variance)
+Contingency Triggers:
+	If BGD repair extends beyond 10 days → escalate additional 50K units to VNM
+	If VNM quality inspection fails → activate IND-FAB-023 (Scenario 3 fallback)"
+________________________________________
+Sample Data for POC
+Demand Planning Dataset (Extended with Multi-Week, Regional Coverage)
+Format: CSV export from O9 demand planning module with enhanced attributes
+Sample Records (Full dataset: 1,000+ rows generated via Python script):
+Scale Note: Synthetic volumes represent per-colorway/per-region scale for computational efficiency. Nike's actual global volumes and DC network are 5-20x larger; patterns are realistic but absolute numbers are downscaled for POC demonstration[136][141].
+sku,product_name,category,channel,region,lifecycle_stage,week_start_date,baseline_forecast,ai_forecast,actual_sales,forecast_accuracy,inventory_on_hand,safety_stock,on_promo
+NK-AM-001,Air Max 270 Black,Footwear,DTC,NA,growth,2026-03-17,3500,3820,3650,0.96,12500,4500,0
+NK-AM-001,Air Max 270 Black,Footwear,DTC,NA,growth,2026-03-24,3600,3950,3720,0.95,11900,4500,0
+NK-AM-001,Air Max 270 Black,Footwear,Wholesale,EU,growth,2026-03-17,2800,3050,2980,0.93,8700,3200,0
+NK-AM-002,Air Max 270 White,Footwear,DTC,NA,growth,2026-03-17,4200,4580,4320,0.94,8900,5000,1
+NK-AM-002,Air Max 270 White,Footwear,DTC,NA,growth,2026-03-24,4100,4520,4390,0.96,9100,5000,1
+NK-RA-101,Dri-FIT Running Shirt M,Apparel,DTC,NA,mature,2026-03-17,2800,2950,2720,0.92,15200,3500,0
+NK-RA-102,Dri-FIT Running Shirt W,Apparel,DTC,NA,mature,2026-03-17,3100,3280,3420,0.96,9800,3800,0
+NK-TR-201,Tech Fleece Joggers M,Apparel,DTC,NA,growth,2026-03-17,1900,2100,2380,0.89,7600,2500,1
+NK-BB-301,LeBron XXI,Basketball Footwear,DTC,NA,intro,2026-03-17,2200,2350,2180,0.93,5400,2800,0
+NK-KD-501,Kids Air Max Runner,Kids Footwear,DTC,NA,growth,2026-03-17,1400,1580,1520,0.94,4800,1800,0
+Enhanced Attributes:
+	channel: DTC, Wholesale, Marketplace, Outlet
+	region: NA (North America), EU (Europe), APAC
+	lifecycle_stage: intro, growth, mature, decline
+	on_promo: Binary flag for promotional periods
+Programmatic Generation: Python script provided generates 1,000+ rows with 4 SKU variants × 12 weeks × multiple regions, preserving correlations and realistic noise patterns[90][95].
+Inventory Snapshot Dataset (Extended with Multi-DC, Regional Coverage)
+Sample Records (Full dataset: 500+ rows generated via script):
+sku,dc_location,region,on_hand_units,in_transit_units,safety_stock_level,max_stock_level,days_of_supply,carrying_cost_per_unit,last_replenishment_date
+NK-AM-001,Memphis-DC01,NA,12500,3200,4500,18000,28,3.20,2026-03-10
+NK-AM-001,Denver-DC02,NA,8900,0,3500,15000,21,3.20,2026-03-08
+NK-AM-001,Rotterdam-DC05,EU,6400,1800,3200,14000,24,3.30,2026-03-09
+NK-AM-002,Atlanta-DC03,NA,8900,1500,5000,16000,18,3.40,2026-03-12
+NK-RA-101,Memphis-DC01,NA,15200,0,3500,12000,45,1.80,2026-03-05
+NK-RA-101,Barcelona-DC06,EU,6200,1400,2500,9500,29,1.90,2026-03-08
+NK-TR-201,Denver-DC02,NA,7600,0,2500,10000,33,2.60,2026-03-07
+NK-BB-301,LosAngeles-DC04,NA,3900,800,2600,8000,19,3.70,2026-03-11
+Enhanced Coverage:
+	6+ Distribution Centers: Memphis, Denver, Atlanta, Los Angeles (NA); Rotterdam, Laakdal (EU) — representative subset of Nike's ~40+ global DC network
+	Weekly snapshots: 12-week rolling inventory positions
+	Days of Supply Note: Calculated as on-hand ÷ (weekly forecast ÷ 7) for illustration; Nike's actual O9 DOS uses safety-adjusted, variability-aware algorithms
+Supplier Capacity Dataset (Extended with Lead Time Variability, CO2 Metrics)
+Sample Records:
+supplier_id,supplier_name,country,product_category,weekly_capacity_units,current_utilization,lead_time_days,lead_time_std_days,quality_score,cost_per_unit,co2_per_unit_kg,compliance_rating
+BGD-FAB-001,Dhaka Textiles Ltd,Bangladesh,Apparel Fabrics,95000,0.88,28,5,4.5,12.50,3.2,A
+VNM-FAB-008,Saigon Premium Fabrics,Vietnam,Apparel Fabrics,85000,0.72,18,4,4.6,14.00,2.8,A
+IND-FAB-023,Chennai Textile Group,India,Apparel Fabrics,120000,0.65,14,3,4.3,13.50,2.5,B+
+CHN-FOOT-105,Guangzhou Footwear Co,China,Footwear Assembly,150000,0.81,35,6,4.7,18.20,4.1,A
+VNM-FOOT-042,Hanoi Shoe Manufacturing,Vietnam,Footwear Assembly,95000,0.74,24,4,4.4,16.80,3.0,A-
+IDN-APP-031,Jakarta Apparel Works,Indonesia,Finished Apparel,110000,0.77,22,4,4.2,11.40,2.9,A-
+MEX-FOOT-057,Monterrey Footwear,Mexico,Footwear Assembly,70000,0.63,20,3,4.0,17.60,2.7,A-
+Enhanced Attributes:
+	lead_time_std_days: Standard deviation for lead time variability modeling
+	co2_per_unit_kg: Carbon footprint per unit for sustainability scoring[94]
+External Signals Dataset (Extended with Regional Coverage)
+Sample Records:
+date,signal_type,product_category,region,signal_value,source,confidence_score
+2026-03-14,social_media_mentions,Air Max,NA,+1250%,Instagram/TikTok,0.87
+2026-03-13,weather_forecast,Running Apparel,NA,Heat Wave - Southeast US,NOAA,0.92
+2026-03-13,weather_forecast,Running Apparel,EU,Unseasonal Warm Spell Western EU,ECMWF,0.88
+2026-03-12,competitor_pricing,Basketball Shoes,NA,-15% Adidas Promo,Price Intelligence,0.95
+2026-03-11,search_trends,Tech Fleece,NA,+340% Google Trends,Google Analytics,0.89
+2026-03-10,event_calendar,LeBron XXI,NA,NBA Playoffs Start Apr 15,ESPN,1.00
+NEW: Constraints Dataset (for Realistic What-If Scenarios)
+Purpose: Defines operational limits for agent scenario evaluation (budget caps, DC capacity, supplier allocations, sustainability targets)
+constraint_id,dimension,entity_id,description,limit_value,unit,effective_start,effective_end
+COST-001,budget,GLOBAL-FY26Q4,Max incremental freight budget for surges,750000,USD,2026-03-01,2026-05-31
+CAP-001,dc_capacity,Memphis-DC01,Max outbound units per week,220000,units,2026-03-01,2026-12-31
+CAP-002,dc_capacity,Denver-DC02,Max outbound units per week,145000,units,2026-03-01,2026-12-31
+CAP-003,dc_capacity,Rotterdam-DC05,Max outbound units per week,130000,units,2026-03-01,2026-12-31
+SUP-001,supplier_capacity,BGD-FAB-001,Max weekly allocation to Nike,65000,units,2026-03-01,2026-12-31
+SUS-001,co2_lane,ASIA-TO-NA,Max avg CO2 per unit for ocean + inland,4.0,kg,2026-03-01,2026-12-31
+SUS-002,co2_lane,ASIA-TO-EU,Max avg CO2 per unit for ocean + inland,3.4,kg,2026-03-01,2026-12-31
+Usage: Agent checks constraints during scenario simulation (e.g., "Does Scenario C exceed freight budget?" or "Does air freight violate CO2 limits?")
+NEW: Evaluation Ground Truth Dataset (for Agent Validation)
+Purpose: Defines "correct" or "preferred" decisions for key scenarios, enabling quantitative agent performance measurement[96][100]
+scenario_id,scenario_type,description,preferred_action_key,expected_kpi_improvement_notes
+SCN-DEM-001,demand_surge,Air Max NA demand surge +1200% social signal,Scenario_C_Hybrid,Maintain service level >95% with budget impact <500k USD
+SCN-INV-001,inventory_rebalance,Denver overstock and Atlanta shortfall in running apparel,Transfer_6500_Units_Denver_to_Atlanta,Eliminate stockout risk at Atlanta while reducing Denver excess by >70%
+SCN-SUP-001,supplier_disruption,Bangladesh fabric supplier delay 21 days for Spring line,Scenario_4_Expedite_plus_Partial_Alt,Limit launch delay to <=14 days and incremental cost <200k USD
+Usage: Compare agent's recommended scenario against preferred_action_key; calculate accuracy rate, regret analysis, KPI alignment scoring.
+Python Generation Script
+All extended datasets are generated using the provided Python script (generate_synthetic_supply_chain.py), which:
+	Takes seed CSVs as input (24 rows total across 4 files)
+	Generates 1,500+ synthetic rows with realistic noise, correlations, and edge cases
+	Preserves Nike-specific patterns: seasonal demand, regional volatility, supplier lead time variance
+	Outputs expanded CSVs ready for Claude agent tool integration
+	Configurable parameters: WEEKS_TO_GENERATE=12, SKU_MULTIPLIER=4, NOISE_LEVEL_DEMAND=0.15
+Script Execution:
+python generate_synthetic_supply_chain.py
+Outputs:
+	demand_planning_dataset_expanded.csv (1,000+ rows)
+	inventory_snapshot_dataset_expanded.csv (500+ rows)
+	supplier_capacity_dataset_expanded.csv (100+ rows)
+	external_signals_dataset_expanded.csv (50+ rows)
+Full script code provided in POC appendix materials.
+________________________________________
+Claude Agent Implementation
+Core Agent Capabilities
+Tool Calling Functions:
+	query_o9_data(endpoint, parameters): Fetch planning data from O9 GraphQL/REST APIs[9]
+	simulate_scenario(base_data, changes): Run "what-if" analysis on supply chain parameters
+	calculate_metrics(scenario_data): Compute KPIs (cost, service level, lead time, risk)[10]
+	rank_scenarios(scenario_list, weights): Multi-criteria decision analysis with weighted scoring
+	generate_recommendation(top_scenario): Create structured output with action steps
+Sample Agent Prompt Template
+SYSTEM_PROMPT = """
+You are an expert supply chain planning agent for Nike's apparel operations.
+Your role is to analyze planning data from the O9 platform, evaluate scenarios
+objectively, and provide actionable recommendations to human planners.
+Core responsibilities:
+	Monitor demand forecasts, inventory levels, and supplier capacity
+	Detect anomalies and planning risks proactively
+	Generate 3-4 scenario alternatives for each decision point
+	Evaluate trade-offs across cost, time, quality, and risk dimensions
+	Provide clear recommendations with confidence scores and rationale
+Output format: Structured JSON with scenario comparison table,
+recommended action, expected impact metrics, and approval workflow.
+Always prioritize: (1) Service level maintenance >95%,
+(2) Cost optimization within ±10% of baseline,
+(3) Supplier relationship preservation, (4) Brand quality standards.
+"""
+USER_PROMPT_TEMPLATE = """
+PLANNING SITUATION:
+{situation_description}
+CURRENT DATA FROM O9:
+{o9_data_snapshot}
+CONSTRAINTS:
+	Budget: {budget_limit}
+	Timeline: {timeline_requirement}
+	Service Level Target: {service_level_target}
+TASK: Analyze this situation, generate scenario alternatives,
+and recommend the optimal response. Structure your output with:
+	Situation summary
+	Scenario comparison table (3-4 options)
+	Recommended scenario with rationale
+	Expected impact metrics
+	Action steps for planner approval
+"""
+Agent Execution Flow
+Pseudocode for Claude agent workflow
+def run_demand_surge_agent(trigger_event):
+# Step 1: Gather context from O9
+demand_data = query_o9_data("demandPlanning", {
+"productFamily": trigger_event.product,
+"horizon": "8W"
+})
+inventory_data = query_o9_data("inventory", {
+"productFamily": trigger_event.product
+})
+supplier_data = query_o9_data("suppliers", {
+"productFamily": trigger_event.product
+})
+# Step 2: Call Claude with agentic prompt
+context = {
+    "situation": f"Demand surge detected: {trigger_event.magnitude}% increase",
+    "demand": demand_data,
+    "inventory": inventory_data,
+    "suppliers": supplier_data
+}
+
+agent_response = claude_api.call(
+    model="claude-3-5-sonnet-20241022",
+    system_prompt=SYSTEM_PROMPT,
+    user_prompt=format_prompt(context),
+    tools=[
+        query_o9_data,
+        simulate_scenario,
+        calculate_metrics,
+        rank_scenarios
+    ],
+    max_tokens=4000
+)
+
+# Step 3: Parse structured recommendation
+recommendation = parse_agent_output(agent_response)
+
+# Step 4: Present to planner dashboard
+return {
+    "scenarios": recommendation.scenario_table,
+    "recommended_action": recommendation.top_scenario,
+    "impact_metrics": recommendation.expected_outcomes,
+    "approval_workflow": recommendation.action_steps,
+    "confidence_score": recommendation.confidence
+}
+
+________________________________________
+POC Success Metrics
+Category	Metric	Target	Validation Method
+Technical	Synthetic data fidelity	KS p>0.05	Statistical tests vs benchmarks[90]
+Technical	O9 API mock integration	>98%	Simulated endpoint responses
+Technical	Agent response time (avg)	<45 sec	Load testing 100+ scenarios
+Decision Quality	Scenario relevance (planner rating)	>4.2/5	Human eval (n=5 mock planners)
+Decision Quality	Recommendation adoption rate	>70%	Baseline comparison scoring
+Decision Quality	KPI accuracy (OTIF, Fill Rate)	±3%	Calculated vs Nike targets[94]
+Business Impact	Agent outperforms baseline	>70%	Monte Carlo 100+ runs[96]
+Business Impact	Forecast accuracy improvement	+5-8%	MAPE reduction simulation
+Business Impact	Inventory optimization	+15-20%	Excess reduction analysis
+Business Impact	Stockout prevention	+25-30%	Fill rate improvement modeling
+Efficiency	Planner time saved per decision	2-3 hours	Workflow analysis
+Explainability	Reasoning transparency score	>4.0/5	Audit trail completeness[100]
+Robustness	Graceful handling of edge cases	>85%	Red team adversarial testing
+
+Table 5: Enhanced POC success criteria with validation methods
+________________________________________
+Implementation Timeline
+Day 1: Synthetic Data Generation & Validation
+	Generate high-fidelity synthetic datasets using SDV/Gretel libraries (10,000+ SKU records)[90][95]
+	Model Nike-specific patterns: hierarchical product families, regional demand volatility, supplier networks
+	Implement correlation preservation: weather-sales (+18-25% heat impact), social media-demand spikes
+	Inject realistic disruptions: 10% black swan events (factory delays, tariff shocks)
+	Validate synthetic data quality: KS-test vs industry benchmarks (target p>0.05), constraint compliance checks
+	Create O9 API mock layer for agent integration testing (GraphQL/REST endpoint simulation)
+	Load datasets into staging environment with schema validation
+Deliverables: Validated CSV/JSON datasets (demand planning, inventory snapshots, supplier capacity, external signals), data quality report, O9 mock API specification
+Day 2: Agent Development with KPI Integration
+	Implement Claude agent with enhanced tool-calling architecture (O9 mock queries, KPI calculators)
+	Build 3 core scenarios with Nike-specific KPI outputs (OTIF, Fill Rate, Inventory Turns, MAPE, SCSI)[94][102]
+	Develop advanced scenario simulation: Monte Carlo modeling (100+ runs per scenario), sensitivity analysis (±20% variance)
+	Create KPI calculation modules: cost-benefit analysis, risk-adjusted NPV, sustainability scoring (CO2 impact)
+	Implement baseline comparison logic: rule-based heuristics, historical decision patterns
+	Design structured output templates: quantified impacts, confidence intervals, contingency triggers
+	Test agent reasoning with 20+ diverse trigger events (demand surges, stockouts, disruptions)
+Deliverables: Claude agent codebase with KPI modules, 3 fully-implemented scenarios with enhanced recommendations, baseline comparison framework
+Day 3: Rigorous Validation & Demo Preparation
+	Execute validation framework: statistical tests (KS-test, correlation analysis), Monte Carlo robustness (100+ simulations)[96][100]
+	Conduct human-in-loop evaluation: 5 mock planners score recommendations (target >4.2/5), adoption rate analysis
+	Perform red team adversarial testing: extreme edge cases (simultaneous multi-supplier failures, demand shock +80%)
+	Run baseline comparison analysis: agent vs rule-based vs historical decisions (target 70%+ agent wins)
+	Generate audit trails: complete reasoning chains, counterfactual scenarios, sensitivity reports
+	Build web UI dashboard: KPI visualizations, scenario comparison tables, confidence scores, sustainability metrics
+	Conduct end-to-end workflow demonstrations for all 3 scenarios with realistic Nike trigger events
+	Prepare comprehensive validation report: statistical results, planner feedback, baseline comparison, failure analysis
+	Document production roadmap with risk mitigation strategies
+Deliverables: Validation report with statistical evidence (KS-test results, Monte Carlo outcomes), planner evaluation scores, demo UI with live scenario walkthroughs, production deployment plan
+________________________________________
+Technical Requirements
+Infrastructure
+	O9 Platform Access: Sandbox environment with API credentials (GraphQL/REST)[11]
+	Claude API: Anthropic API key with Claude 3.5 Sonnet access
+	Compute: AWS EC2 t3.medium or equivalent (2 vCPU, 4GB RAM)
+	Storage: 50GB for sample datasets and agent logs
+	Network: Secure VPN connection to O9 tenant (if required)
+Software Dependencies
+requirements.txt
+anthropic>=0.21.0
+httpx>=0.27.0
+pandas>=2.2.0
+numpy>=1.26.0
+fastapi>=0.110.0
+pydantic>=2.6.0
+python-dotenv>=1.0.1
+Data Sources
+	O9 Demand Planning Module: Baseline/AI forecasts, actual sales, forecast accuracy[12]
+	O9 Inventory Management: Stock levels, safety stock, days of supply, carrying costs
+	O9 Supplier Collaboration: Capacity, utilization, lead times, quality scores[13]
+	External APIs (optional): Weather data (NOAA), social trends (Google Trends), market intelligence
+________________________________________
+Risk Mitigation
+Risk	Impact	Mitigation Strategy
+O9 API rate limits exceeded	Agent performance degradation	Implement caching layer, batch queries, request throttling
+Inaccurate scenario simulations	Poor recommendation quality	Validate agent outputs against historical data, A/B test scenarios
+Data quality issues in O9	Misleading agent analysis	Pre-flight data validation, anomaly detection, confidence scoring
+Planner distrust of AI recommendations	Low adoption rate	Transparent reasoning, human-in-loop approval, gradual rollout
+
+Table 6: Key risks and mitigation approaches
+Engineering Execution Risks (Algoleap Internal):
+	Synthetic data realism vs time constraint: Risk of over-engineering data generators and under-investing in scenario polish within 3-day window. Mitigation: Use simple schemas with benchmark calibration; prioritize realistic patterns over volume; pre-bake edge cases rather than attempting full simulation complexity.
+	O9 mock API schema drift: Risk that mock layer assumptions don't match Nike's actual O9 tenant structure, requiring significant rework in Phase 1. Mitigation: Keep agent tool abstractions generic (e.g., get_demand_snapshot) rather than tightly coupled to assumed schema; anchor mock on published O9 documentation; design for easy endpoint remapping.
+	Scope creep on simulations and evaluations: Risk of attempting overly general platform features (multi-agent orchestration, complex reinforcement learning) instead of delivering 3 polished flagship scenarios. Mitigation: Enforce strict prioritization: one agent pipeline, 3 opinionated scenario templates, minimal but robust tooling; defer advanced features to Phase 2.
+	Evaluation ground truth complexity: Risk of spending excessive time debugging evaluation logic instead of core agent capabilities. Mitigation: Codify simple, clear decision policies per scenario (e.g., "maximize service subject to cost and CO2 caps"); measure regret and KPI alignment against explicit rules; avoid over-complicated baseline models.
+
+
+based on this description what are the requirements of data ?
+is the data needed matches our exsting fact datasets?
+
+does the records count matches our datasets?
+
+dont hallucinate based data i have given answer me 
+
+
+Data Requirements from POC and columns from facts datasets for each present this in a table form like comparing does columns match, does every dataset has fact dataset?
+
+create a pdf of Data Requirements from POC and columns from facts datasets for each present this in a table form like comparing does columns match, does every dataset has fact dataset? this response 

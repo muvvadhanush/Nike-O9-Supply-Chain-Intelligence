@@ -1,0 +1,51 @@
+constraint_type,entity,description,limit_value,unit,start_date,end_date
+supplier_order_minimum,Guangzhou Footwear Co,Minimum order quantity per supplier,4230.73,units,2026-01-23,2026-04-15
+lead_time,Saigon Premium Fabrics,Maximum acceptable lead time,9.42,days,2026-02-09,2026-05-30
+co2_emission,Los Angeles Distribution Center,Carbon footprint per unit limit,5.55,kg_per_unit,2026-01-24,2026-07-16
+lead_time,Barcelona Distribution Center,Maximum acceptable lead time,12.17,days,2026-02-16,2026-08-03
+supplier_order_minimum,Los Angeles Distribution Center,Minimum order quantity per supplier,210.98,units,2026-02-17,2026-06-13
+budget,Barcelona Distribution Center,Maximum procurement budget allocation,481874.39,USD,2026-02-25,2026-06-12
+quality_score_minimum,Memphis Distribution Center,Minimum acceptable quality rating,3.24,score,2026-02-03,2026-03-13
+warehouse_capacity,Jakarta Apparel Works,Maximum units storable in DC,28242.69,units,2026-03-02,2026-04-22
+supplier_order_minimum,Barcelona Distribution Center,Minimum order quantity per supplier,11795.23,units,2026-01-09,2026-05-16
+co2_emission,Asia Pacific Region,Carbon footprint per unit limit,3.48,kg_per_unit,2026-01-25,2026-04-03
+quality_score_minimum,Guangzhou Footwear Co,Minimum acceptable quality rating,3.46,score,2026-01-25,2026-03-29
+budget,Denver Distribution Center,Maximum procurement budget allocation,469932.87,USD,2026-01-13,2026-03-14
+co2_emission,Chennai Textile Group,Carbon footprint per unit limit,3.78,kg_per_unit,2026-02-11,2026-07-21
+budget,Monterrey Footwear Manufacturing,Maximum procurement budget allocation,475141.11,USD,2026-01-16,2026-04-25
+co2_emission,Guangzhou Footwear Co,Carbon footprint per unit limit,2.1,kg_per_unit,2026-02-05,2026-03-18
+lead_time,Hanoi Shoe Manufacturing,Maximum acceptable lead time,13.99,days,2026-02-28,2026-07-08
+budget,Asia Pacific Region,Maximum procurement budget allocation,239258.49,USD,2026-03-01,2026-04-15
+co2_emission,Guangzhou Footwear Co,Carbon footprint per unit limit,2.87,kg_per_unit,2026-02-10,2026-07-01
+budget,Atlanta Distribution Center,Maximum procurement budget allocation,307202.16,USD,2026-01-10,2026-04-02
+co2_emission,Barcelona Distribution Center,Carbon footprint per unit limit,5.06,kg_per_unit,2026-02-13,2026-03-15
+lead_time,Monterrey Footwear Manufacturing,Maximum acceptable lead time,24.69,days,2026-01-06,2026-04-04
+budget,Jakarta Apparel Works,Maximum procurement budget allocation,175883.02,USD,2026-02-17,2026-03-22
+warehouse_capacity,Dhaka Textiles Ltd,Maximum units storable in DC,153817.55,units,2026-01-04,2026-05-01
+quality_score_minimum,Asia Pacific Region,Minimum acceptable quality rating,3.75,score,2026-01-17,2026-05-26
+co2_emission,Los Angeles Distribution Center,Carbon footprint per unit limit,2.08,kg_per_unit,2026-01-12,2026-05-06
+co2_emission,Hanoi Shoe Manufacturing,Carbon footprint per unit limit,2.73,kg_per_unit,2026-01-23,2026-03-15
+supplier_order_minimum,Chennai Textile Group,Minimum order quantity per supplier,368.16,units,2026-02-07,2026-05-09
+supplier_order_minimum,Asia Pacific Region,Minimum order quantity per supplier,4692.35,units,2026-02-20,2026-07-08
+lead_time,North America Region,Maximum acceptable lead time,25.5,days,2026-01-12,2026-07-06
+warehouse_capacity,North America Region,Maximum units storable in DC,174156.24,units,2026-01-10,2026-03-13
+budget,North America Region,Maximum procurement budget allocation,665036.21,USD,2026-01-03,2026-04-25
+quality_score_minimum,Atlanta Distribution Center,Minimum acceptable quality rating,3.13,score,2026-01-13,2026-05-06
+lead_time,Denver Distribution Center,Maximum acceptable lead time,12.51,days,2026-01-09,2026-07-05
+co2_emission,Asia Pacific Region,Carbon footprint per unit limit,7.35,kg_per_unit,2026-01-19,2026-06-08
+supplier_order_minimum,Rotterdam Distribution Center,Minimum order quantity per supplier,1850.25,units,2026-01-15,2026-05-09
+co2_emission,Hanoi Shoe Manufacturing,Carbon footprint per unit limit,1.92,kg_per_unit,2026-01-23,2026-04-15
+co2_emission,Memphis Distribution Center,Carbon footprint per unit limit,7.06,kg_per_unit,2026-03-02,2026-06-02
+quality_score_minimum,Asia Pacific Region,Minimum acceptable quality rating,3.19,score,2026-02-10,2026-03-24
+budget,Rotterdam Distribution Center,Maximum procurement budget allocation,1556693.43,USD,2026-01-19,2026-03-13
+warehouse_capacity,Memphis Distribution Center,Maximum units storable in DC,98835.32,units,2026-01-10,2026-04-06
+warehouse_capacity,Jakarta Apparel Works,Maximum units storable in DC,285611.24,units,2026-01-08,2026-02-07
+supplier_order_minimum,Chennai Textile Group,Minimum order quantity per supplier,2257.05,units,2026-01-13,2026-07-10
+quality_score_minimum,Guangzhou Footwear Co,Minimum acceptable quality rating,4.16,score,2026-01-26,2026-07-25
+co2_emission,Los Angeles Distribution Center,Carbon footprint per unit limit,1.12,kg_per_unit,2026-02-25,2026-06-18
+budget,Saigon Premium Fabrics,Maximum procurement budget allocation,375628.02,USD,2026-03-01,2026-07-16
+budget,Barcelona Distribution Center,Maximum procurement budget allocation,1754818.77,USD,2026-01-14,2026-02-21
+quality_score_minimum,Guangzhou Footwear Co,Minimum acceptable quality rating,1.65,score,2026-01-23,2026-06-01
+quality_score_minimum,Guangzhou Footwear Co,Minimum acceptable quality rating,3.9,score,2026-01-05,2026-02-19
+co2_emission,Chennai Textile Group,Carbon footprint per unit limit,1.59,kg_per_unit,2026-01-25,2026-03-01
+quality_score_minimum,Monterrey Footwear Manufacturing,Minimum acceptable quality rating,3.23,score,2026-02-19,2026-08-05
