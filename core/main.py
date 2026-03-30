@@ -44,6 +44,13 @@ async def favicon():
         return FileResponse(full_path)
     return {"status": "no favicon found"}
 
+@app.get("/favicon.svg", include_in_schema=False)
+async def favicon_svg():
+    full_path = os.path.join(UI_DIR, "favicon.svg")
+    if os.path.exists(full_path):
+        return FileResponse(full_path)
+    return {"status": "no favicon found"}
+
 
 @app.get("/api/initial-state", response_model=InitialState)
 async def get_initial_state():
