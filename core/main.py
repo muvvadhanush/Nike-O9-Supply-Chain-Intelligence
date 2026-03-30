@@ -29,11 +29,18 @@ app.mount("/static", StaticFiles(directory=UI_DIR), name="static")
 async def get_index():
     """Returns the primary Nike POC dashboard."""
     html_file = "index.html"
-    return FileResponse(os.path.join(UI_DIR, html_file))
+    full_path = os.path.join(UI_DIR, html_file)
+    print(f"DEBUG: Looking for index at {full_path}")
+    if not os.path.exists(full_path):
+        return {"error": f"index.html not found at {full_path}. Check if 'ui' folder was pushed to GitHub."}
+    return FileResponse(full_path)
 
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
-    return FileResponse(os.path.join(UI_DIR, "favicon.svg"))
+    full_path = os.path.join(UI_DIR, "favicon.svg")
+    if os.path.exists(full_path):
+        return FileResponse(full_path)
+    return {"status": "no favicon found"}
 
 
 @app.get("/api/initial-state", response_model=InitialState)
