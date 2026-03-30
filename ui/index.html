@@ -1799,7 +1799,8 @@
       </div>
     </div>
 
-    <div class="sc-pills" id="sc-pills-main-container" style="display:flex; align-items:center; gap:30px; width:100%; border-bottom:1px solid var(--border); padding-bottom:15px; margin-bottom:20px;">
+    <div class="sc-pills" id="sc-pills-main-container"
+      style="display:flex; align-items:center; gap:30px; width:100%; border-bottom:1px solid var(--border); padding-bottom:15px; margin-bottom:20px;">
       <!-- All pills (Orchestrator + Scenarios) will be rendered here dynamically -->
     </div>
 
@@ -1929,8 +1930,8 @@
     // If the user opens the file from their hard drive (file:// protocol),
     // forcefully route all API requests back to the local backend port 8000.
     // Otherwise, use the server's own origin dynamically.
-    // For deployment: replace "https://your-render-url.onrender.com" with your actual Render service URL.
-    const CLOUD_API_URL = ''; 
+    // For deployment: replace "https:nike-o9-supply-chain.onrender.com" with your actual Render service URL.
+    const CLOUD_API_URL = '';
     const API_BASE = CLOUD_API_URL || (window.location.protocol === 'file:' ? 'http://localhost:8009' : window.location.origin);
 
     /* ══════════════ DASHBOARD RENDERING ══════════════ */
@@ -2065,7 +2066,7 @@
       ];
       const icons = ['📈', '⚖️', '🔴', '📊', '🔧'];
       const el = document.getElementById('sc-pills-main-container');
-      
+
       el.innerHTML = scenariosData.map((sc, i) => {
         if (sc.is_orchestrator) {
           return `
@@ -2082,7 +2083,7 @@
 
         const shortName = sc.title.split('—')[0].trim().split('–')[0].trim();
         // Shift index for scenarios because Index 0 in scenariosData is now Orchestrator
-        const scenarioIndex = sc.pill; 
+        const scenarioIndex = sc.pill;
 
         return `
           <div class="sc-pill" id="pill-${scenarioIndex}" onclick="selectScenario(${scenarioIndex})">
@@ -2115,7 +2116,7 @@
         if (data.dashboard_scenarios) {
           scenariosDataFull = data.dashboard_scenarios;
           // Extract only real scenarios for the global scenarios array (sc.pill >= 0)
-          scenarios = scenariosDataFull.filter(s => s.pill >= 0).sort((a,b) => a.pill - b.pill);
+          scenarios = scenariosDataFull.filter(s => s.pill >= 0).sort((a, b) => a.pill - b.pill);
           renderScenarioPills(scenariosDataFull);
         }
 
@@ -2197,7 +2198,7 @@
       document.getElementById('panel-recommendation').style.display = 'none';
       document.getElementById('sc-logs-card').style.display = 'flex';
       document.getElementById('panel-analysis').style.display = 'block';
-      document.getElementById('sc-logs-content').innerHTML = '<div style="color:var(--text3);font-style:italic;padding:10px 0;">Orchestrator ready for Scenario '+(idx+1)+'...</div>';
+      document.getElementById('sc-logs-content').innerHTML = '<div style="color:var(--text3);font-style:italic;padding:10px 0;">Orchestrator ready for Scenario ' + (idx + 1) + '...</div>';
       document.getElementById('agent-steps-container').innerHTML = '';
 
       // Populate hidden description box
@@ -2289,7 +2290,7 @@
       lc.innerHTML = '<div style="color:var(--text3);font-style:italic;padding:10px 0;">Agent sequence initiated...</div>';
       const stc = document.getElementById('agent-steps-container');
       stc.innerHTML = '';
-      
+
       // Hide recommendation panels from previous run
       document.getElementById('panel-recommendation').style.display = 'none';
       document.getElementById('sc-desc-box').style.display = 'none';
@@ -2388,7 +2389,7 @@
 
         rb.innerHTML = `<svg width="10" height="10" viewBox="0 0 12 12" fill="none"><path d="M3 2l7 4-7 4V2z" fill="currentColor"/></svg> Complete`;
         agentRunning = false;
-        
+
         if (hubPulse) hubPulse.style.display = 'none';
         if (hubStatus) hubStatus.textContent = 'Task Complete';
 
