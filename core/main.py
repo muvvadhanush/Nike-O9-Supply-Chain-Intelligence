@@ -26,15 +26,20 @@ UI_DIR = os.path.join(_PROJECT_ROOT, "ui")
 app.mount("/static", StaticFiles(directory=UI_DIR), name="static")
 
 
+@app.get("/health")
+async def health_check():
+    """Lightweight endpoint for Render/AWS health-check protocols."""
+    return {"status": "healthy", "service": "Nike Control Tower OCR"}
+
 @app.get("/")
 async def get_index():
-    """Returns the primary Nike POC dashboard for Unified Cloud Hosting."""
+    """Returns the primary Nike POC dashboard. Responds with index.html or helpful error if missing."""
     html_file = "index.html"
     full_path = os.path.join(UI_DIR, html_file)
     if not os.path.exists(full_path):
         # Fallback for local dev if file isn't found in cloud root
-        print(f"CRITICAL: {full_path} missing. Check 'ui' directory.")
-        return {"error": "Dashboard index.html not found. Deployment structure error."}
+        print(f"CRITICAL: {full_path} missing in {UI_DIR}. Check 'ui' directory.")
+        return {"error": "Dashboard index.html not found.", "path": full_path}
     return FileResponse(full_path)
 
 @app.get("/favicon.ico", include_in_schema=False)
