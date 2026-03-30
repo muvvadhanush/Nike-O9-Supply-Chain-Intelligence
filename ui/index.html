@@ -1930,9 +1930,10 @@
     // If the user opens the file from their hard drive (file:// protocol),
     // forcefully route all API requests back to the local backend port 8000.
     // Otherwise, use the server's own origin dynamically.
-    // FOR DEPLOYMENT: Ensure this matches your Render service URL exactly.
-    const CLOUD_API_URL = 'https://nike-o9-supply-chain.onrender.com';
-    const API_BASE = CLOUD_API_URL.replace(/\/$/, '') || (window.location.protocol === 'file:' ? 'http://localhost:8009' : window.location.origin);
+    // FOR DEPLOYMENT: Unified Hosting Mode (Render). 
+    // Uses the same domain for both UI and API to eliminate CORS issues.
+    const CLOUD_API_URL = ''; 
+    const API_BASE = window.location.origin;
 
     /* ══════════════ DASHBOARD RENDERING ══════════════ */
 
