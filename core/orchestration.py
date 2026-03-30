@@ -945,9 +945,10 @@ def run_orchestration(scenario_id: int = None) -> ExecutionResult:
 
     # 6. GENERATED OPTIONS PHASE (Node 5)
     gen_node = AuditNode(id='generated', name='Generated Options', status='done', icon='list')
+    best_fill = int(sorted_viable[0].fill_rate * 100) if sorted_viable else (int(processed_scenarios[0].fill_rate * 100) if processed_scenarios else 0)
     gen_node.logs = [
         f"Calculated {len(processed_scenarios)} viable path permutations.",
-        f"Top option provides {int(sorted_viable[0].fill_rate * 100)}% service level projection.",
+        f"Top option provides {best_fill}% service level projection.",
         "Stochastic variance within 5% tolerance."
     ]
 

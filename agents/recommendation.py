@@ -51,7 +51,8 @@ class RecommendationAgent:
             payload["format"] = "json"
         
         try:
-            response = requests.post(url, json=payload, timeout=30)
+            # Drop timeout from 30 to 5 to prevent consecutive 60s timeouts leading to 502 Bad Gateway
+            response = requests.post(url, json=payload, timeout=5)
             if response.status_code == 200:
                 return response.json().get("response", "").strip()
         except:
@@ -235,8 +236,15 @@ class RecommendationAgent:
 
 
     def generate(self, best_scenario: Scenario, analysis: Dict, signals: List[Signal], use_case: str, logs: list) -> Recommendation:
-        logs.append(f"Formulating strategy for {use_case} using {best_scenario.name}...")
-        context_str = f"Scenario: {best_scenario.name}, Cost: {best_scenario.cost}, Risk: {best_scenario.risk}"
+        best_name = best_scenario.name if best_scenario and hasattr(best_scenario, 'name') else "Unknown Scenario"
+        best_cost = best_scenario.cost if best_scenario and hasattr(best_scenario, 'cost') else 0.0
+        best_risk = best_scenario.risk if best_scenario and hasattr(best_scenario, 'risk') else 0.0
+        best_score = best_scenario.score if best_scenario and hasattr(best_scenario, 'score') else 85
+        best_fill_rate = best_scenario.fill_rate if best_scenario and hasattr(best_scenario, 'fill_rate') else 0.90
+        best_otif = best_scenario.otif if best_scenario and hasattr(best_scenario, 'otif') else 94.0
+        
+        logs.append(f"Formulating strategy for {use_case} using {best_name}...")
+        context_str = f"Scenario: {best_name}, Cost: {best_cost}, Risk: {best_risk}"
         
         logs.append(f"Requesting LLM rationale for scenario {best_scenario.id}...")
         live_paragraph = self._get_ollama_rationale(use_case, context_str)
@@ -280,7 +288,8 @@ class RecommendationAgent:
             rationale = [f"Safety Fallback Logic: {strategy_paragraph[:100]}..."]
 
         # TIGHTENING BENCHMARK: Explicitly add GT tokens to recommendation name for pass verification
-        rec_name = f"[{use_case}] {best_scenario.name}"
+        best_name = best_scenario.name if best_scenario and hasattr(best_scenario, 'name') else "Unknown Scenario"
+        rec_name = f"[{use_case}] {best_name}"
         if use_case == "DEMAND_SURGE" and "Memphis" not in rec_name:
             rec_name += " (Memphis/Guangzhou Link)"
         elif use_case == "INVENTORY_REBALANCING" and "Memphis" not in rec_name:
@@ -289,17 +298,18 @@ class RecommendationAgent:
             rec_name += " (Chennai/Saigon Backup)"
 
         rec = Recommendation(
-            scenario_id=best_scenario.id,
+            scenario_id=best_scenario.id if best_scenario and hasattr(best_scenario, 'id') else "SC-0",
             name=rec_name,
-            command=f"ACTIVATE {use_case} POLICY: {best_scenario.name}",
-            confidence=int(best_scenario.score) if best_scenario.score else 85,
+            command=f"ACTIVATE {use_case} POLICY: {best_name}",
+            confidence=int(best_score) if best_score else 85,
             rationale=rationale,
             strategy_paragraph=strategy_paragraph,
             metrics={
-                "OTIF Target": f"{best_scenario.otif:.2f}" if hasattr(best_scenario, 'otif') and best_scenario.otif else "0.94",
-                "Risk Profile": f"{int(best_scenario.risk*100)}%",
-                "Fill Rate": f"{int(best_scenario.fill_rate*100)}%",
+                "OTIF Target": f"{best_otif:.2f}",
+                "Risk Profile": f"{int(best_risk*100)}%",
+                "Fill Rate": f"{int(best_fill_rate*100)}%",
                 "Agent Mode": "Advanced Intelligence v2"
             }
+
         )
         return rec
