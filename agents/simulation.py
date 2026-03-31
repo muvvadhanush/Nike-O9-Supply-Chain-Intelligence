@@ -10,8 +10,10 @@ class SimulationAgent:
     Simulates multi-modal logistics scenarios using a Random Forest ML model.
     Predicts the ROI/Score of a scenario based on cost, lead time, and risk.
     """
-    def __init__(self, scenarios_data: List[Dict]):
+    def __init__(self, scenarios_data: List[Dict], iterations: int = 500):
         self.scenarios_data = scenarios_data
+        self.iterations = iterations
+        self.total_simulations_run = 0
         self.model = RandomForestRegressor(n_estimators=100, random_state=42)
         self._train_model()
 
@@ -56,6 +58,7 @@ class SimulationAgent:
     def simulate(self, use_case: str, logs: list) -> List[Scenario]:
         logs.append(f"Running Simulation Agent for {use_case}...")
         scenarios = []
+        self.total_simulations_run = 0
         
         for s_data in self.scenarios_data:
             cost = float(s_data.get('cost', 500000))
@@ -67,11 +70,10 @@ class SimulationAgent:
             features = np.array([[cost, lt, risk]])
             baseline_score = self.model.predict(features)[0]
             
-            # 2. Monte Carlo Stochastic Stress-Test (500 Iterations)
-            iterations = 500
+            # 2. Monte Carlo Stochastic Stress-Test (Dynamic Iterations)
             iteration_scores = []
             
-            for i in range(iterations):
+            for i in range(self.iterations):
                 # Add stochastic noise (Jitters)
                 j_cost = cost * (1 + np.random.normal(0, 0.04)) # 4% cost variance
                 j_lt = max(1, lt + np.random.normal(0, 1.2))    # 1.2d lead-time jitter
@@ -95,6 +97,7 @@ class SimulationAgent:
                     j_score *= 0.8  
                 
                 iteration_scores.append(float(j_score))
+                self.total_simulations_run += 1
 
             # 3. Sustainability (SCSI) Scoring
             # AIR: ~15.4 kg CO2/unit, SEA: ~4.0 kg CO2/unit, TRUCK: ~5.2 kg CO2/unit

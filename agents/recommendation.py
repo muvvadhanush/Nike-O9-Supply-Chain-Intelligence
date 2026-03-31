@@ -61,12 +61,11 @@ class RecommendationAgent:
     def _get_ollama_rationale(self, use_case: str, context: str) -> str:
         """Attempts to fetch a cohesive strategic paragraph."""
         prompt = (
-            f"You are a Nike Supply Chain AI. Use case: {use_case}. "
+            f"You are a Nike Senior Supply Chain Director. Use case: {use_case}. "
             f"Context: {context}. "
-            f"Provide a cohesive 1-paragraph strategic summary. "
-            f"The paragraph MUST first describe the core supply chain problem, "
-            f"and then explicitly state why this particular recommendation is the best strategic choice "
-            f"among the generated options. Keep it under 100 words."
+            f"Task: Provide a professional strategic rationale between 30 and 50 words. "
+            f"Focus on the 'Why' behind this specific decision relative to current constraints. "
+            f"Do not exceed 55 words."
         )
         return self._call_llm_api(prompt)
 
@@ -90,12 +89,16 @@ class RecommendationAgent:
         Provides a concise 'Why' and 'Context' for the dashboard view.
         """
         prompt = f"""
-        Role: Nike Supply Chain Intelligence Agent.
-        Task: Provide a 1-sentence 'Why' and a 1-sentence 'Context' for a {scenario_type} alert.
+        Role: Nike Supply Chain Intelligence Director.
+        Task: Provide a detailed 100-word analysis (formatted as 'Why' and 'Context') for a {scenario_type} alert.
         Data: {json.dumps(context_data)}
         
+        Requirements:
+        1. 'why': A data-driven explanation of the trigger (approx 50 words).
+        2. 'ctx': The broader logistical impact or next-step context (approx 50 words).
+        3. Use professional, enterprise-grade terminology.
+        
         Return JSON format: {{"why": "...", "ctx": "..."}}
-        Keep it professional, data-driven, and specific to the SKU/Supplier mentioned.
         """
         try:
             response = self._call_llm_api(prompt, is_json=True)
@@ -124,13 +127,14 @@ class RecommendationAgent:
                 )
             
             prompt = (
-                f"You are a Nike Supply Chain Expert. Use case: {use_case}. "
-                f"Scenario Context: {context}. {stat_ctx}"
+                f"Role: Nike Supply Chain Manager. Use case: {use_case}. "
+                f"Operational Context: {context}. Statistical Modeling: {stat_ctx}"
                 f"The user selected this logistics option: {option_title} ({option_desc}). "
-                f"Generate a granular, 4-step sequential implementation roadmap for this specific selection. "
-                f"Each step must be a concrete operational action. "
-                f"Format as JSON with keys: 'kpis' (list of objects with keys 'lbl', 'val', 'delta', 'neg'), "
-                f"'confidence': int, 'confLabel': str, 'contingency': list, 'actions': list."
+                f"Task: Generate a granular, 4-step sequential implementation roadmap. "
+                f"MANDATORY: You must only use the ORIGINAL NAMES of SKUs, Distribution Centers (DCs), "
+                f"Store locations, and Events mentioned in the context. "
+                f"Each step must be a concrete, data-derived managerial action. "
+                f"Format as JSON with keys: 'kpis' (list), 'confidence': int, 'confLabel': str, 'contingency': list, 'actions': list."
             )
             raw_resp = self._call_llm_api(prompt, is_json=True)
             if raw_resp:
