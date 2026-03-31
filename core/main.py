@@ -26,20 +26,15 @@ UI_DIR = os.path.join(_PROJECT_ROOT, "ui")
 app.mount("/static", StaticFiles(directory=UI_DIR), name="static")
 
 
-@app.get("/health")
-async def health_check():
-    """Lightweight endpoint for Render/AWS health-check protocols."""
-    return {"status": "healthy", "service": "Nike Control Tower OCR"}
-
 @app.get("/")
 async def get_index():
-    """Returns the primary Nike POC dashboard. Responds with index.html or helpful error if missing."""
+    """Returns the primary Nike POC dashboard for Unified Cloud Hosting."""
     html_file = "index.html"
     full_path = os.path.join(UI_DIR, html_file)
     if not os.path.exists(full_path):
         # Fallback for local dev if file isn't found in cloud root
-        print(f"CRITICAL: {full_path} missing in {UI_DIR}. Check 'ui' directory.")
-        return {"error": "Dashboard index.html not found.", "path": full_path}
+        print(f"CRITICAL: {full_path} missing. Check 'ui' directory.")
+        return {"error": "Dashboard index.html not found. Deployment structure error."}
     return FileResponse(full_path)
 
 @app.get("/favicon.ico", include_in_schema=False)
@@ -61,22 +56,9 @@ async def favicon_svg():
 async def get_initial_state():
     """
     Returns the starting Signals and Inventory Risk data.
-    Wrapped in a try-except to prevent 502 Bad Gateway on memory-constrained hosts.
     """
-    try:
-        data = orchestration.get_initial_state()
-        return data
-    except Exception as e:
-        import traceback
-        print(f"FAILED TO LOAD INITIAL STATE: {e}")
-        traceback.print_exc()
-        # Return a partial/empty state instead of crashing the worker
-        return {
-            "signals": [], "inventory": [], "kpis": [], "alerts": [],
-            "forecast_bars": [], "dc_network": [], "sku_table": [],
-            "suppliers": [], "external_signals": [], "dashboard_scenarios": [],
-            "activities": []
-        }
+    data = orchestration.get_initial_state()
+    return data
 
 @app.post("/api/refine-recommendation")
 async def refine_recommendation(request: RefineRequest):

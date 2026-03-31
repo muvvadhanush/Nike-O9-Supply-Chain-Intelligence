@@ -1,0 +1,13 @@
+1. Simulations Run	Static Number	Hardcoded to 500 in orchestration.py to represent the Monte Carlo loop size.	Orchestrator Logic - change this hardcoded to real runs it did 
+
+2. Summary Text (Top Left) - update this prompt to generate response in 100 words based on the data it reads(LLM Agent)
+
+3. Strategic Rationale - it need to generate atleast 30 to 50 words in brief of 'Why' (LLM Agent)
+
+4. Implementation Roadmap - it need to think like the manager of supply chain and generate the next steps it will take based on the data calculated it need to use the original names of apparels, dcs, stores, locations, or any events in the roadmap steps so user can understand them easily to implement the next steps (LLM Agent)
+
+question - Do LLM can generate all the possible Options using the data not only the hardcoded data ?
+
+read each and every line clearly and answer me 
+
+Make this full conversation into a pdf so that i can go through it whenever i want 

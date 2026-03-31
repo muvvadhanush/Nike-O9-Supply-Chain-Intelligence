@@ -27,19 +27,6 @@ DATASET_DIR = os.path.join(_PROJECT_ROOT, "data", "Dataset")
 DATASETS_DIR = os.path.join(_PROJECT_ROOT, "data", "datasets")
 SAVED_ACTIVITIES_FILE = os.path.join(DATASET_DIR, "saved_activities.json")
 
-# Global DataFrame Cache to prevent 502 OOM Crashes on Render (Free Tier: 512MB RAM)
-_df_cache: Dict[str, pd.DataFrame] = {}
-
-def get_cached_df(path: str, usecols: Optional[List[str]] = None) -> Optional[pd.DataFrame]:
-    """Retrieves or loads a CSV into a shared cache memory for the current worker."""
-    if not os.path.exists(path):
-        return None
-    cache_key = f"{path}_{'-'.join(usecols) if usecols else 'all'}"
-    if cache_key not in _df_cache:
-        # Limit memory spikes by skipping unused columns and reducing fragment footprint
-        _df_cache[cache_key] = pd.read_csv(path, usecols=usecols).fillna(0)
-    return _df_cache[cache_key]
-
 
 def _resolve_csv_path(preferred: str, *fallbacks: str) -> Optional[str]:
     """Prefer canonical `datasets/` file; use legacy paths only if preferred is missing."""
@@ -73,9 +60,10 @@ def load_constraints() -> List[Dict]:
 
 def load_signals() -> List[Signal]:
     path = os.path.join(DATASET_DIR, "Fact_MarketSignals.csv")
-    df = get_cached_df(path, usecols=['event_type', 'intensity', 'days_to_impact', 'confidence_score', 'source'])
-    if df is None:
+    if not os.path.exists(path):
         return []
+    
+    df = pd.read_csv(path).fillna(0)
     signals = []
     # Dynamic Sorting for real-time relevance
     df = df.sort_values("confidence_score", ascending=False)
@@ -96,10 +84,10 @@ def load_signals() -> List[Signal]:
 
 def load_inventory() -> List[InventoryItem]:
     path = os.path.join(DATASET_DIR, "Fact_InventorySnapshot.csv")
-    # Optimize: Only read columns needed for core mapping
-    df = get_cached_df(path, usecols=['sku', 'on_hand_units', 'demand_forecast'])
-    if df is None:
+    if not os.path.exists(path):
         return []
+    
+    df = pd.read_csv(path).fillna(0)
     on_hand_col = 'on_hand_units' if 'on_hand_units' in df.columns else ('current_stock' if 'current_stock' in df.columns else None)
     sku_col = 'sku' if 'sku' in df.columns else 'product_name'
     
@@ -230,9 +218,7 @@ def load_demand_forecast() -> List[ForecastBar]:
     )
     if not path: return []
     
-    # 3.2MB file: Load ONLY Item and Forecast columns to save RAM
-    df = get_cached_df(path, usecols=['Item.[Item]', 'D Base Forecast Quantity'])
-    if df is None: return []
+    df = pd.read_csv(path).fillna(0)
     item_col = 'Item.[Item]'
     qty_col = 'D Base Forecast Quantity'
     
@@ -431,27 +417,28 @@ def build_sku_table(inventory: List[InventoryItem]) -> List[dict]:
             {"sku_name": "Kids Air Max Runner", "sku_code": "NK-KD-501", "channel": "DTC", "on_hand": "4,800", "safety_stock": "1,800", "status": "OK", "status_class": "badge-g"},
         ]
     
-    # Memory Intensive Check: Filter columns and cache
-    df = get_cached_df(path, usecols=['Item.[Item]', 'Sales Domain.[Customer Group]', 'D Base Forecast Quantity', 'D Buff1 Forecast Quantity'])
-    if df is None:
-        return []
+    df = pd.read_csv(path)
+    item_col = 'Item.[Item]'
+    chan_col = 'Sales Domain.[Customer Group]'
+    qty_col = 'D Base Forecast Quantity'
+    buff_col = 'D Buff1 Forecast Quantity'
     
-    grouped = df.groupby('Item.[Item]').agg({
-        'Sales Domain.[Customer Group]': 'first',
-        'D Base Forecast Quantity': 'mean',
-        'D Buff1 Forecast Quantity': 'mean'
+    grouped = df.groupby(item_col).agg({
+        chan_col: 'first',
+        qty_col: 'mean',
+        buff_col: 'mean'
     }).reset_index()
-    grouped = grouped.sort_values('D Base Forecast Quantity', ascending=False).head(7)
+    grouped = grouped.sort_values(qty_col, ascending=False).head(7)
     
     rows = []
     # Cross-reference with inventory list if possible, else mock on_hand from qty
     inv_map = {i.sku: i.on_hand for i in inventory}
     
     for _, row in grouped.iterrows():
-        full_name = row['Item.[Item]']
+        full_name = row[item_col]
         sku_name = full_name.split(' - ')[0]
-        on_hand = inv_map.get(full_name, int(row['D Base Forecast Quantity'] * 1.5))
-        safety = int(row['D Buff1 Forecast Quantity'])
+        on_hand = inv_map.get(full_name, int(row[qty_col] * 1.5))
+        safety = int(row[buff_col])
         ratio = on_hand / safety if safety > 0 else 2.0
         
         if ratio < 1.2:
@@ -464,7 +451,7 @@ def build_sku_table(inventory: List[InventoryItem]) -> List[dict]:
         rows.append({
             "sku_name": sku_name,
             "sku_code": full_name.split(' - ')[-1],
-            "channel": row['Sales Domain.[Customer Group]'],
+            "channel": row[chan_col],
             "on_hand": f"{on_hand:,}",
             "safety_stock": f"{safety:,}",
             "status": status,
@@ -531,15 +518,8 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
         ]
         
         agent_logs = []
-        if skip_llm:
-            simulated = [Scenario(**s) for s in scenarios_data]
-            for s in simulated:
-                s.otif = 95.0
-                s.score = 85.0
-                s.co2_uplift = 2.4 if s.mode == 'AIR' else 0.5
-        else:
-            sim_agent = SimulationAgent(scenarios_data)
-            simulated = sim_agent.simulate("DEMAND_SURGE", agent_logs)
+        sim_agent = SimulationAgent(scenarios_data)
+        simulated = sim_agent.simulate("DEMAND_SURGE", agent_logs)
         
         kpi_agent = KPIAgent()
         evaluated, hist_acc = kpi_agent.evaluate(simulated, agent_logs)
@@ -587,7 +567,7 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
                 {'label': 'Signal Source', 'value': primary.source},
                 {'label': 'Demand uplift', 'value': f"+{uplift}%"},
                 {'label': 'Historical Accuracy', 'value': f"{hist_acc:.1f}%"},
-                {'label': 'Simulations Run', 'value': str(len(simulated) * 500)},
+                {'label': 'Simulations Run', 'value': '500'},
                 {'label': 'Options Found', 'value': str(len(simulated))},
             ],
             steps=[
@@ -628,14 +608,8 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
         ]
         
         agent_logs = []
-        if skip_llm:
-            simulated = [Scenario(**s) for s in scenarios_data]
-            for s in simulated:
-                s.otif = 98.0
-                s.score = 90.0
-        else:
-            sim_agent = SimulationAgent(scenarios_data)
-            simulated = sim_agent.simulate("INVENTORY_REBALANCING", agent_logs)
+        sim_agent = SimulationAgent(scenarios_data)
+        simulated = sim_agent.simulate("INVENTORY_REBALANCING", agent_logs)
         
         kpi_agent = KPIAgent()
         evaluated, _ = kpi_agent.evaluate(simulated, agent_logs)
@@ -681,7 +655,7 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
                 {'label': 'Inventory Gap', 'value': f"{gap:,} units"},
                 {'label': 'Affected SKU', 'value': critical.sku},
                 {'label': 'Source Hub', 'value': transfer['from_dc']},
-                {'label': 'Simulations Run', 'value': str(len(simulated) * 500)},
+                {'label': 'Simulations Run', 'value': '500'},
                 {'label': 'Options Found', 'value': str(len(simulated))},
             ],
             steps=[
@@ -715,14 +689,8 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
         ]
         
         agent_logs = []
-        if skip_llm:
-            simulated = [Scenario(**s) for s in scenarios_data]
-            for s in simulated:
-                s.otif = 94.0
-                s.score = 88.0
-        else:
-            sim_agent = SimulationAgent(scenarios_data)
-            simulated = sim_agent.simulate("SUPPLIER_CONSTRAINT", agent_logs)
+        sim_agent = SimulationAgent(scenarios_data)
+        simulated = sim_agent.simulate("SUPPLIER_CONSTRAINT", agent_logs)
         
         kpi_agent = KPIAgent()
         evaluated, _ = kpi_agent.evaluate(simulated, agent_logs)
@@ -773,7 +741,7 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
                 {'label': 'Disrupted Entity', 'value': s_name},
                 {'label': 'Impacted Units', 'value': '245,000'},
                 {'label': 'Risk Assessment', 'value': 'Critical'},
-                {'label': 'Simulations Run', 'value': str(len(simulated) * 500)},
+                {'label': 'Simulations Run', 'value': '500'},
                 {'label': 'Options Found', 'value': str(len(simulated))},
             ],
             steps=[
@@ -977,10 +945,9 @@ def run_orchestration(scenario_id: int = None) -> ExecutionResult:
 
     # 6. GENERATED OPTIONS PHASE (Node 5)
     gen_node = AuditNode(id='generated', name='Generated Options', status='done', icon='list')
-    best_fill = int(sorted_viable[0].fill_rate * 100) if sorted_viable else (int(processed_scenarios[0].fill_rate * 100) if processed_scenarios else 0)
     gen_node.logs = [
         f"Calculated {len(processed_scenarios)} viable path permutations.",
-        f"Top option provides {best_fill}% service level projection.",
+        f"Top option provides {int(sorted_viable[0].fill_rate * 100)}% service level projection.",
         "Stochastic variance within 5% tolerance."
     ]
 
