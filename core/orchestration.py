@@ -531,8 +531,15 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
         ]
         
         agent_logs = []
-        sim_agent = SimulationAgent(scenarios_data)
-        simulated = sim_agent.simulate("DEMAND_SURGE", agent_logs)
+        if skip_llm:
+            simulated = [Scenario(**s) for s in scenarios_data]
+            for s in simulated:
+                s.otif = 95.0
+                s.score = 85.0
+                s.co2_uplift = 2.4 if s.mode == 'AIR' else 0.5
+        else:
+            sim_agent = SimulationAgent(scenarios_data)
+            simulated = sim_agent.simulate("DEMAND_SURGE", agent_logs)
         
         kpi_agent = KPIAgent()
         evaluated, hist_acc = kpi_agent.evaluate(simulated, agent_logs)
@@ -621,8 +628,14 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
         ]
         
         agent_logs = []
-        sim_agent = SimulationAgent(scenarios_data)
-        simulated = sim_agent.simulate("INVENTORY_REBALANCING", agent_logs)
+        if skip_llm:
+            simulated = [Scenario(**s) for s in scenarios_data]
+            for s in simulated:
+                s.otif = 98.0
+                s.score = 90.0
+        else:
+            sim_agent = SimulationAgent(scenarios_data)
+            simulated = sim_agent.simulate("INVENTORY_REBALANCING", agent_logs)
         
         kpi_agent = KPIAgent()
         evaluated, _ = kpi_agent.evaluate(simulated, agent_logs)
@@ -702,8 +715,14 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
         ]
         
         agent_logs = []
-        sim_agent = SimulationAgent(scenarios_data)
-        simulated = sim_agent.simulate("SUPPLIER_CONSTRAINT", agent_logs)
+        if skip_llm:
+            simulated = [Scenario(**s) for s in scenarios_data]
+            for s in simulated:
+                s.otif = 94.0
+                s.score = 88.0
+        else:
+            sim_agent = SimulationAgent(scenarios_data)
+            simulated = sim_agent.simulate("SUPPLIER_CONSTRAINT", agent_logs)
         
         kpi_agent = KPIAgent()
         evaluated, _ = kpi_agent.evaluate(simulated, agent_logs)
