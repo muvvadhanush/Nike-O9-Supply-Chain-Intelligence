@@ -27,6 +27,19 @@ DATASET_DIR = os.path.join(_PROJECT_ROOT, "data", "Dataset")
 DATASETS_DIR = os.path.join(_PROJECT_ROOT, "data", "datasets")
 SAVED_ACTIVITIES_FILE = os.path.join(DATASET_DIR, "saved_activities.json")
 
+# Global DataFrame Cache to prevent 502 OOM Crashes on Render (Free Tier: 512MB RAM)
+_df_cache: Dict[str, pd.DataFrame] = {}
+
+def get_cached_df(path: str, usecols: Optional[List[str]] = None) -> Optional[pd.DataFrame]:
+    """Retrieves or loads a CSV into a shared cache memory for the current worker."""
+    if not os.path.exists(path):
+        return None
+    cache_key = f"{path}_{'-'.join(usecols) if usecols else 'all'}"
+    if cache_key not in _df_cache:
+        # Limit memory spikes by skipping unused columns and reducing fragment footprint
+        _df_cache[cache_key] = pd.read_csv(path, usecols=usecols).fillna(0)
+    return _df_cache[cache_key]
+
 
 def _resolve_csv_path(preferred: str, *fallbacks: str) -> Optional[str]:
     """Prefer canonical `datasets/` file; use legacy paths only if preferred is missing."""
@@ -60,10 +73,9 @@ def load_constraints() -> List[Dict]:
 
 def load_signals() -> List[Signal]:
     path = os.path.join(DATASET_DIR, "Fact_MarketSignals.csv")
-    if not os.path.exists(path):
+    df = get_cached_df(path, usecols=['event_type', 'intensity', 'days_to_impact', 'confidence_score', 'source'])
+    if df is None:
         return []
-    
-    df = pd.read_csv(path).fillna(0)
     signals = []
     # Dynamic Sorting for real-time relevance
     df = df.sort_values("confidence_score", ascending=False)
@@ -84,10 +96,10 @@ def load_signals() -> List[Signal]:
 
 def load_inventory() -> List[InventoryItem]:
     path = os.path.join(DATASET_DIR, "Fact_InventorySnapshot.csv")
-    if not os.path.exists(path):
+    # Optimize: Only read columns needed for core mapping
+    df = get_cached_df(path, usecols=['sku', 'on_hand_units', 'demand_forecast'])
+    if df is None:
         return []
-    
-    df = pd.read_csv(path).fillna(0)
     on_hand_col = 'on_hand_units' if 'on_hand_units' in df.columns else ('current_stock' if 'current_stock' in df.columns else None)
     sku_col = 'sku' if 'sku' in df.columns else 'product_name'
     
@@ -218,7 +230,9 @@ def load_demand_forecast() -> List[ForecastBar]:
     )
     if not path: return []
     
-    df = pd.read_csv(path).fillna(0)
+    # 3.2MB file: Load ONLY Item and Forecast columns to save RAM
+    df = get_cached_df(path, usecols=['Item.[Item]', 'D Base Forecast Quantity'])
+    if df is None: return []
     item_col = 'Item.[Item]'
     qty_col = 'D Base Forecast Quantity'
     
@@ -417,18 +431,17 @@ def build_sku_table(inventory: List[InventoryItem]) -> List[dict]:
             {"sku_name": "Kids Air Max Runner", "sku_code": "NK-KD-501", "channel": "DTC", "on_hand": "4,800", "safety_stock": "1,800", "status": "OK", "status_class": "badge-g"},
         ]
     
-    df = pd.read_csv(path)
-    item_col = 'Item.[Item]'
-    chan_col = 'Sales Domain.[Customer Group]'
-    qty_col = 'D Base Forecast Quantity'
-    buff_col = 'D Buff1 Forecast Quantity'
+    # Memory Intensive Check: Filter columns and cache
+    df = get_cached_df(path, usecols=['Item.[Item]', 'Sales Domain.[Customer Group]', 'D Base Forecast Quantity', 'D Buff1 Forecast Quantity'])
+    if df is None:
+        return []
     
-    grouped = df.groupby(item_col).agg({
-        chan_col: 'first',
-        qty_col: 'mean',
-        buff_col: 'mean'
+    grouped = df.groupby('Item.[Item]').agg({
+        'Sales Domain.[Customer Group]': 'first',
+        'D Base Forecast Quantity': 'mean',
+        'D Buff1 Forecast Quantity': 'mean'
     }).reset_index()
-    grouped = grouped.sort_values(qty_col, ascending=False).head(7)
+    grouped = grouped.sort_values('D Base Forecast Quantity', ascending=False).head(7)
     
     rows = []
     # Cross-reference with inventory list if possible, else mock on_hand from qty

@@ -61,9 +61,22 @@ async def favicon_svg():
 async def get_initial_state():
     """
     Returns the starting Signals and Inventory Risk data.
+    Wrapped in a try-except to prevent 502 Bad Gateway on memory-constrained hosts.
     """
-    data = orchestration.get_initial_state()
-    return data
+    try:
+        data = orchestration.get_initial_state()
+        return data
+    except Exception as e:
+        import traceback
+        print(f"FAILED TO LOAD INITIAL STATE: {e}")
+        traceback.print_exc()
+        # Return a partial/empty state instead of crashing the worker
+        return {
+            "signals": [], "inventory": [], "kpis": [], "alerts": [],
+            "forecast_bars": [], "dc_network": [], "sku_table": [],
+            "suppliers": [], "external_signals": [], "dashboard_scenarios": [],
+            "activities": []
+        }
 
 @app.post("/api/refine-recommendation")
 async def refine_recommendation(request: RefineRequest):
