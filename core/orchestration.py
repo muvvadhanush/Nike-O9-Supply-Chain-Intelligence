@@ -21,11 +21,8 @@ from agents.simulation import SimulationAgent
 from agents.kpi import KPIAgent
 from agents.recommendation import RecommendationAgent
 from agents.constants import BUDGET_CAP, SIGNAL_THRESHOLD
-_CORE_ROOT = os.path.dirname(os.path.abspath(__file__))
-_PROJECT_ROOT = os.path.dirname(_CORE_ROOT)
-DATASET_DIR = os.path.join(_PROJECT_ROOT, "data", "Dataset")
-DATASETS_DIR = os.path.join(_PROJECT_ROOT, "data", "datasets")
-SAVED_ACTIVITIES_FILE = os.path.join(DATASET_DIR, "saved_activities.json")
+# PATHS are now centralized in orchestration.py to avoid circular imports.
+# (Moving imports inside methods where necessary)
 
 
 def _resolve_csv_path(preferred: str, *fallbacks: str) -> Optional[str]:
@@ -402,11 +399,13 @@ def build_alerts(inventory: List[InventoryItem], signals: List[Signal]) -> List[
 
 def build_sku_table(inventory: List[InventoryItem]) -> List[dict]:
     """Build SKU inventory table data using Fact Demand Inputs."""
-    path = _resolve_csv_path(
-        os.path.join(DATASET_DIR, "Fact_DemandInputForecast.csv"),
-        os.path.join(DATASETS_DIR, "Fact_DemandInputForecast.csv"),
-    )
-    if not path:
+    # Use a local imports or hardcoded paths to break circularity
+    _CORE_DIR = os.path.dirname(os.path.abspath(__file__))
+    _PROJ_ROOT = os.path.dirname(os.path.dirname(_CORE_DIR))
+    DATASET_DIR = os.path.join(_PROJ_ROOT, "data", "Dataset")
+    
+    path = os.path.join(DATASET_DIR, "Fact_DemandInputForecast.csv")
+    if not os.path.exists(path):
         return [
             {"sku_name": "Air Max 270 Black", "sku_code": "NK-AM-001", "channel": "DTC", "on_hand": "12,500", "safety_stock": "4,500", "status": "OK", "status_class": "badge-g"},
             {"sku_name": "Air Max 270 White", "sku_code": "NK-AM-002", "channel": "DTC", "on_hand": "8,900", "safety_stock": "5,000", "status": "SURGE", "status_class": "badge-a"},
@@ -741,7 +740,6 @@ def get_dynamic_scenario(pill_idx: int, skip_llm: bool = False) -> DashboardScen
                 {'label': 'Triggered', 'value': datetime.now().strftime("%Y-%m-%d %H:%M")},
                 {'label': 'Disrupted Entity', 'value': s_name},
                 {'label': 'Impacted Units', 'value': '245,000'},
-                {'label': 'Risk Assessment', 'value': 'Critical'},
                 {'label': 'Risk Assessment', 'value': 'Critical'},
                 {'label': 'Simulations Run', 'value': str(sim_agent.total_simulations_run)},
                 {'label': 'Options Found', 'value': str(len(simulated))},
