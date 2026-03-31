@@ -21,8 +21,11 @@ from agents.simulation import SimulationAgent
 from agents.kpi import KPIAgent
 from agents.recommendation import RecommendationAgent
 from agents.constants import BUDGET_CAP, SIGNAL_THRESHOLD
-# PATHS are now centralized in orchestration.py to avoid circular imports.
-# (Moving imports inside methods where necessary)
+_CORE_ROOT = os.path.dirname(os.path.abspath(__file__))
+_PROJECT_ROOT = os.path.dirname(_CORE_ROOT)
+DATASET_DIR = os.path.join(_PROJECT_ROOT, "data", "Dataset")
+DATASETS_DIR = os.path.join(_PROJECT_ROOT, "data", "datasets")
+SAVED_ACTIVITIES_FILE = os.path.join(DATASET_DIR, "saved_activities.json")
 
 
 def _resolve_csv_path(preferred: str, *fallbacks: str) -> Optional[str]:

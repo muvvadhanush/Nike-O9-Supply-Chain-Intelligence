@@ -23,7 +23,10 @@ class SimulationAgent:
         otherwise falls back to a synthetic baseline.
         """
         import os
-        from core.orchestration import DATASET_DIR
+        # Break circular import by discovering the path locally
+        _AGENTS_DIR = os.path.dirname(os.path.abspath(__file__))
+        _PROJ_ROOT = os.path.dirname(_AGENTS_DIR)
+        DATASET_DIR = os.path.join(_PROJ_ROOT, "data", "Dataset")
         
         path = os.path.join(DATASET_DIR, "Fact_DemandInputForecast.csv")
         
