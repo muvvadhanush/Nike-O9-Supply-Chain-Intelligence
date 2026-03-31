@@ -448,10 +448,10 @@ def build_sku_table(inventory: List[InventoryItem]) -> List[dict]:
     inv_map = {i.sku: i.on_hand for i in inventory}
     
     for _, row in grouped.iterrows():
-        full_name = row[item_col]
+        full_name = row['Item.[Item]']
         sku_name = full_name.split(' - ')[0]
-        on_hand = inv_map.get(full_name, int(row[qty_col] * 1.5))
-        safety = int(row[buff_col])
+        on_hand = inv_map.get(full_name, int(row['D Base Forecast Quantity'] * 1.5))
+        safety = int(row['D Buff1 Forecast Quantity'])
         ratio = on_hand / safety if safety > 0 else 2.0
         
         if ratio < 1.2:
@@ -464,7 +464,7 @@ def build_sku_table(inventory: List[InventoryItem]) -> List[dict]:
         rows.append({
             "sku_name": sku_name,
             "sku_code": full_name.split(' - ')[-1],
-            "channel": row[chan_col],
+            "channel": row['Sales Domain.[Customer Group]'],
             "on_hand": f"{on_hand:,}",
             "safety_stock": f"{safety:,}",
             "status": status,
