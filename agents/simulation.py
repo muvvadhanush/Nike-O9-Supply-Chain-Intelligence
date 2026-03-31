@@ -12,7 +12,8 @@ class SimulationAgent:
     """
     def __init__(self, scenarios_data: List[Dict]):
         self.scenarios_data = scenarios_data
-        self.model = RandomForestRegressor(n_estimators=100, random_state=42)
+        # Optimization: Use n_jobs=-1 for potential multi-core speedup (if env supports)
+        self.model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1)
         self._train_model()
 
     def _train_model(self):
@@ -26,11 +27,9 @@ class SimulationAgent:
         path = os.path.join(DATASET_DIR, "Fact_DemandInputForecast.csv")
         
         if os.path.exists(path):
-            df = pd.read_csv(path).fillna(0)
+            # Optimization: Load only what's needed and limit rows for POC speed
+            df = pd.read_csv(path, nrows=1000).fillna(0)
             # Use real quantities and buffer levels as features
-            # qty_col = 'D Base Forecast Quantity'
-            # buff_col = 'D Buff1 Forecast Quantity'
-            # For simplicity in this POC integration, we'll map them to cost/lt proxies
             costs = df['D Base Forecast Quantity'].values * 150 # Proxy for cost
             lead_times = np.random.randint(5, 25, len(df)) # Placeholder for real LT if not in fact
             risks = (df['D Buff1 Forecast Quantity'] / df['D Base Forecast Quantity']).fillna(0.1).values
@@ -67,8 +66,8 @@ class SimulationAgent:
             features = np.array([[cost, lt, risk]])
             baseline_score = self.model.predict(features)[0]
             
-            # 2. Monte Carlo Stochastic Stress-Test (500 Iterations)
-            iterations = 500
+            # 2. Monte Carlo Stochastic Stress-Test (Reduced to 250 for Cloud Stability)
+            iterations = 250
             iteration_scores = []
             
             for i in range(iterations):

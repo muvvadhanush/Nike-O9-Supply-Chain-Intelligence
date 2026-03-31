@@ -33,7 +33,8 @@ class RecommendationAgent:
                 payload["response_format"] = {"type": "json_object"}
             
             try:
-                response = requests.post(url, json=payload, headers=headers, timeout=30)
+                # Optimized: Reduced from 30 to 20 to ensure total pipeline < 60s
+                response = requests.post(url, json=payload, headers=headers, timeout=20)
                 response.raise_for_status()
                 data = response.json()
                 return data["choices"][0]["message"]["content"].strip()
